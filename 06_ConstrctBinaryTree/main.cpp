@@ -4,6 +4,7 @@
 #include <exception>
 
 using namespace std;
+using namespace cv;
 
 
 struct BinaryTreeNode
