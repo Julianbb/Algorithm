@@ -14,3 +14,6 @@
 1. 方法一乘以base 10次
 2. 方法二，$ 2^{10} $可以分成$ 2^5\times2^5 $, $ 2^5 $可以分成$ 2^2\times2^2\times $base, 利用公式:
 $$ a^n= $$
+
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=ax^{2}&space;&plus;&space;by^{2}&space;&plus;&space;c&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ax^{2}&space;&plus;&space;by^{2}&space;&plus;&space;c&space;=&space;0" title="ax^{2} + by^{2} + c = 0" /></a>
