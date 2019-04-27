@@ -4,7 +4,7 @@ using namespace std;
 
 
 
-
+// 判断
 bool CheckAfterFindBRootInA(BinaryTreeNode* p1, BinaryTreeNode* p2)
 {
     if(p2 == nullptr && p1== nullptr) return true; // 两个都是 nullptr
@@ -18,7 +18,7 @@ bool CheckAfterFindBRootInA(BinaryTreeNode* p1, BinaryTreeNode* p2)
 }
 
 
-
+// 遍历A, 找到和B相同的子节点，再调用上面函数进行判断
 bool ATreeHasBTree(BinaryTreeNode* A, BinaryTreeNode* B)
 {
     if(A == nullptr || B ==nullptr) return false;
@@ -32,7 +32,7 @@ bool ATreeHasBTree(BinaryTreeNode* A, BinaryTreeNode* B)
     else
     {
 	result = ATreeHasBTree(A->m_pLeft, B);
-	if(result == false) // 左边子树也没有，那只剩下右边的了
+	if(result == false) // 左边子树也没有，那只剩下右边的了,这句很重要，千万不能丢，否则如果下面一句result错误，则覆盖上面正确结果
 	result = ATreeHasBTree(A->m_pRight, B);
     }
 
