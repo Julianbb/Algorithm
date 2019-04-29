@@ -1,5 +1,5 @@
-题目:　请完成一个函数，实现输入一个二叉树，输出它的镜像
-比如：
+题目:　请完成一个函数，实现输入一个二叉树，输出它的镜像<br>
+比如：<br>
  ![image](https://github.com/julianbb/Algorithm/blob/master/19_MirrorOfBinaryTree/image/1.png)
 
 
