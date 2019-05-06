@@ -2,16 +2,41 @@
 using namespace std;
 
 
+
+
 bool VerifySequenceOfBST(int sequence[], int length)
 {
+	if(sequence == nullptr || length<=0) return false;
+	if(length == 1) return true; // 如果只有一个，直接返回true
 
+	int tmp_root = sequence[length-1];
+	int index =0;
+	while(index<length-1) // 找到第一个 > tmp_root的 index
+	{
+		if(sequence[index]<tmp_root) 
+			index++;
+		else
+			break;
+	}
+	int tmp = index;
+	while(tmp<length-1) // 遍历index 之后的，如果符合要求，后面应该都>tmp_root
+	{
+		if(sequence[tmp] < tmp_root) // 如果index之后还有< tmp_root，直接返回false
+			return false;
+		else 
+			tmp++;
+	}
 
+	bool result = true;
 
+	if(index!=0) // 很重要，if(index == 0),执行的时候直接返回false, 但是有可能符合要求的
+	result = VerifySequenceOfBST(sequence, index); // 递归处理前半部分
+
+	if(length-index-1 != 0)
+	result = VerifySequenceOfBST(sequence+index, length-index-1); //递归处理后半部分
+
+	return result;
 }
-
-
-
-
 
 
 
