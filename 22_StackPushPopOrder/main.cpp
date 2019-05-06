@@ -6,9 +6,37 @@ using namespace std;
 
 bool IsPopOrder(const int* pPush, const int* pPop, int length)
 {
+    if(pPop == nullptr || pPush == nullptr || length <= 0) return false;
+    
+    stack<int> stack_help;
+    int push_index = 0;
+    stack_help.push(pPush[push_index]); //先压第一个元素
 
+    for(int i=0; i<length; i++) // 从弹出序列从前往后逐一处理
+    {
+	while(1)
+	{
+	    int tmp = stack_help.top();
+	    if(tmp == pPop[i]) //如果辅助栈的顶　==  弹出序列当前元素
+	    {
+		stack_help.pop(); // 弹出辅助栈顶
+		break;  //该下一个弹出序列的元素
+	    }
+	    else // 如果辅助栈的顶　!= 弹出序列当前元素
+	    {
+		push_index++;
+		if(push_index>=length)
+		    return false;
+		stack_help.push(pPush[push_index]);  // 只要压入序列还有，将剩下元素继续往后压栈
+	    }
+	}
+	
+    }
 
-    return true;
+    if(stack_help.empty())
+	return true;
+    else
+	return false;
 }
 
 
