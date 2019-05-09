@@ -15,12 +15,16 @@ ComplexListNode* Clone_next(ComplexListNode* pHead)
 		{
 			pClone_nextHead = pTmp;
 			pClone_nextTail = pTmp;
+			i++;
 		}
-		pClone_nextTail->m_pNext = pTmp;
-		pClone_nextTail = pTmp;
-
+		else
+		{
+			pClone_nextTail->m_pNext = pTmp;
+			pClone_nextTail = pTmp;
+		}
 		pNode = pNode->m_pNext;
 	}
+	return pClone_nextHead;
 }
 
 
@@ -79,6 +83,7 @@ ComplexListNode* Clone(ComplexListNode* pHead)
 void Test(const char* test, ComplexListNode* pHead)
 {
     if(test == nullptr) return;
+	cout << test << "======================="<< endl;
     cout << "origin list is:" << endl;
     PrintList(pHead);
 
