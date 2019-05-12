@@ -1,9 +1,77 @@
 #include "ComplexList.h"
 
+// 先复制next
+ComplexListNode* Clone_next(ComplexListNode* pHead)
+{
+	if(pHead == nullptr) return nullptr;
+	ComplexListNode* pNode = pHead;
+	ComplexListNode* pClone_nextHead = nullptr;
+	ComplexListNode* pClone_nextTail = nullptr;
+	int i=0;
+	while(pNode!=nullptr)
+	{
+		ComplexListNode* pTmp = CreateNode(pNode->m_Value);
+		if(i==0)
+		{
+			pClone_nextHead = pTmp;
+			pClone_nextTail = pTmp;
+			i++;
+		}
+		else
+		{
+			pClone_nextTail->m_pNext = pTmp;
+			pClone_nextTail = pTmp;
+		}
+		pNode = pNode->m_pNext;
+	}
+	return pClone_nextHead;
+}
+
+
+//找数字，返回ComplexListNode*
+ComplexListNode* FindNumber(ComplexListNode* pHead, int target)
+{
+	if(pHead == nullptr)return nullptr;
+	ComplexListNode* pNode = pHead;
+	while(pNode != nullptr)
+	{
+		if(pNode->m_Value == target)
+			break;
+		pNode = pNode->m_pNext;
+	}
+	return pNode;
+}
+
+
+//再复制sibling
+void  Clone_Sibling(ComplexListNode* pClone, ComplexListNode* pHead)
+{
+	if(pHead == nullptr || clone == nullptr) return;
+	ComplexListNode* pNode_b = pHead;
+	ComplexListNode* pNode_c = pClone;
+	while(pNode_b!=nullptr||pNode_c!=nullptr)
+	{
+		if(pNode_b->m_pSibling != nullptr)
+		{
+			int num = pNode_b->m_pSibling->m_Value;
+			ComplexListNode* pTargetNum = FindNumber(pClone, num);	
+			pNode_c->m_pSibling = pTargetNum;
+		}
+		pNode_b = pNode_b->m_pNext;
+		pNode_c = pNode_c->m_pNext;
+	}
+}
+
+
 
 ComplexListNode* Clone(ComplexListNode* pHead)
 {
-
+	if(pHead == nullptr) return nullptr;
+	ComplexListNode* pNode = nullptr;
+		
+	pNode = Clone_next(pHead);
+	 		Clone_Sibling(pNode, pHead);
+	return pNode;
 }
 
 
@@ -15,6 +83,7 @@ ComplexListNode* Clone(ComplexListNode* pHead)
 void Test(const char* test, ComplexListNode* pHead)
 {
     if(test == nullptr) return;
+	cout << test << "======================="<< endl;
     cout << "origin list is:" << endl;
     PrintList(pHead);
 
