@@ -3,11 +3,39 @@
 using namespace std;
 
 
-BinaryTreeNode* Convert(BinaryTreeNode* pHeadOfTree)
+void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
 {
-	if(pHeadOfTree == nullptr) return nullptr;
+    if(pNode == nullptr)return;
 
+    BinaryTreeNode* pCurrent = pNode;
+    if(pCurrent->m_pLeft != nullptr)
+	ConvertNode(pCurrent->m_pLeft, pLastNodeInList);
+
+    pCurrent->m_pLeft = *pLastNodeInList;
+    if(*pLastNodeInList != nullptr)
+	(*pLastNodeInList)->m_pRight = pCurrent;
+
+    *pLastNodeInList = pCurrent;
+
+    if(pCurrent->m_pRight != nullptr)
+	ConvertNode(pCurrent->m_pRight, pLastNodeInList);
 }
+
+
+BinaryTreeNode* Convert(BinaryTreeNode* pRootOfTree)
+{
+    if(pRootOfTree == nullptr) return nullptr;
+    BinaryTreeNode* pLastNodeInList = nullptr;
+    ConvertNode(pRootOfTree, &pLastNodeInList);
+     
+    //此时，pLastNodeInList已经指向list的尾部
+    BinaryTreeNode* pHeadOfList = pLastNodeInList;
+    while(pHeadOfList != nullptr && pHeadOfList->m_pLeft != nullptr)
+	pHeadOfList = pHeadOfList->m_pLeft;
+
+    return pHeadOfList;
+}
+
 
 
 
@@ -66,11 +94,12 @@ void Test(const char* testname, BinaryTreeNode* pRootOfTree)
 {
     if(testname == nullptr) return;
     else
-	cout << "testname:" << endl;
+	cout << "testname:" << testname << endl;
 
     PrintTree(pRootOfTree);
     BinaryTreeNode* pHeadOfList = Convert(pRootOfTree);
     PrintDoubleLinkedList(pHeadOfList);
+    cout << endl;
 }
 
 
