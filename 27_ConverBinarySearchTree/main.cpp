@@ -12,6 +12,7 @@ BinaryTreeNode* Convert(BinaryTreeNode* pHeadOfTree)
 
 
 
+
 // ===================测试代码==========================
 void PrintDoubleLinkedList(BinaryTreeNode* pHeadOfList)
 {
@@ -61,7 +62,7 @@ void DestroyList(BinaryTreeNode* pHeadOfList)
 }
 
 
-void Test(char* testname, BinaryTreeNode* pRootOfTree)
+void Test(const char* testname, BinaryTreeNode* pRootOfTree)
 {
     if(testname == nullptr) return;
     else
