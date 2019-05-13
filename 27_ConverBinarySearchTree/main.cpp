@@ -5,6 +5,7 @@ using namespace std;
 
 BinaryTreeNode* Convert(BinaryTreeNode* pHeadOfTree)
 {
+	if(pHeadOfTree == nullptr) return nullptr;
 
 }
 
@@ -14,13 +15,33 @@ BinaryTreeNode* Convert(BinaryTreeNode* pHeadOfTree)
 // ===================测试代码==========================
 void PrintDoubleLinkedList(BinaryTreeNode* pHeadOfList)
 {
-
+	if(pHeadOfList == nullptr)
+		return;
+	BinaryTreeNode* pTmp = pHeadOfList;
 //从左到右
+ 	cout << "from left to right: ";
+	while(pTmp != nullptr)
+	{
+		cout << pTmp->m_nValue << " " ;
+		if(pTmp->m_pRight != nullptr)
+			pTmp = pTmp->m_pRight;
+		else
+			break;
+	}
 
-
-
+	
+	cout << endl;
 //从右到左
-
+	cout << "from right to left: ";
+	while(pTmp != nullptr)
+	{
+		cout << pTmp->m_nValue << " ";
+		if(pTmp->m_pLeft != nullptr)
+			pTmp = pTmp->m_pLeft;
+		else
+			break;
+	}
+	cout << endl;
 
 }
 
