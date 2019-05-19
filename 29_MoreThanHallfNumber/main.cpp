@@ -38,55 +38,66 @@ int MoreThanHalfNum_Solution_2(int* array, int length)
 {
     if(array == nullptr || length == 0) return 0;
 
-    int mid = length << 1;
-    int start = 0
+    int mid = length >> 1;
+    int start = 0;
     int end = length-1;
 
     int index = Partition(array, start, end);
-    if(index > mid)
+    while(index != mid)
     {
-	
+	if(index < mid)
+	{
+	    start = index+1;    // 不能直接写在下面语句里，否则无法改变start end 的值
+	    index = Partition(array,start, end);
+	    // index = Partition(array, index+1, end); // 错误写法
+	}
+	if(index > mid)
+	{
+	    end = index-1;
+	    index = Partition(array, start, end);
+	}
     }
 
-
-
+    return array[index];
 
     return 0;
 }
 
 
-void swap(int* a, int* b)
-{
-    if(a==nullptr || b==nullptr) return;
 
-    int tmp ;
-    tmp = *a;
-    *a = *b;
-    *b = tmp;
+void swap(int* num1, int* num2)
+{
+    int temp = *num1;
+    *num1 = *num2;
+    *num2 = temp;
 }
 
 int Partition(int* array, int start, int end)
 {
-    if(array == nullptr || start>=end) return 0;
-    int head = 0; 
-    int start_p = start+1;
+    if(array == nullptr || start > end) return 0;
+
+
+    int head = start;
+    int start_p = start;
     int end_p = end;
 
-    while(start_p != end_p)
-    {
-	while(array[start_p]<array[head])
-	    start_p++;
-	while(array[end_p]>array[head])
-	    end_p --;
 
+    while(start_p < end_p)
+    {
+	while(array[end_p] >= array[head] &&  end_p > start_p) // 如果head 设置为start, 则从end开始, =也很重要
+	    end_p--;
+	while(array[start_p] <= array[head] && start_p < end_p)
+	    start_p++;
+
+	if(start_p < end_p) //还没有相遇
 	swap(&array[start_p], &array[end_p]);
     }
-    
+
+    if(start_p == end_p) // 相遇了
     swap(&array[head], &array[start_p]);
 
     return start_p;
 }
-
 
 
 
@@ -179,12 +190,12 @@ void Test6(FUN* function)
 int main(void)
 {
 
-    Test1(MoreThanHalfNum_Solution_1);
-    Test2(MoreThanHalfNum_Solution_1);
-    Test3(MoreThanHalfNum_Solution_1);
-    Test4(MoreThanHalfNum_Solution_1);
-    Test5(MoreThanHalfNum_Solution_1);
-    Test6(MoreThanHalfNum_Solution_1);
+    Test1(MoreThanHalfNum_Solution_2);
+    Test2(MoreThanHalfNum_Solution_2);
+    Test3(MoreThanHalfNum_Solution_2);
+    Test4(MoreThanHalfNum_Solution_2);
+    Test5(MoreThanHalfNum_Solution_2);
+    Test6(MoreThanHalfNum_Solution_2);
 
     return 0;
 }
