@@ -6,4 +6,4 @@
 ### 分析:<br>
 1. 从１到n进行遍历，对每一位数计算1 的个数(通常解法，时间复杂度O(n^2))<br>
 2. 从数字本省规律进行分析，对遍历每一位，对每一位统计出现１的次数,具体规律如下：<br>
-![image](https://github.com/julianbb/Algorithm/blob/master/32_NumberOf1/image/1.png)
+![image](https://github.com/julianbb/Algorithm/tree/master/32_NumberOf1/image/1.jpg)
