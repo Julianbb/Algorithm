@@ -5,4 +5,4 @@
 1. 进行排列组合，然后比较，选出最小的数<br>
 2. 按位进行比较，把所有数字的第一位依照桶排序方法存起来(存相对于数组的index)，从桶0开始遍历，如果桶里面个数是１，则将桶里的数输入最终结果。如果遇到桶里面个数大于1,证明第一位相同，继续比较这桶里面的数的第二位，递归<br>
 
-![image]()
+![image](https://github.com/Julianbb/Algorithm/blob/master/33_SortArrayForMinNumber/image/1.png)
