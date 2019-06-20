@@ -13,3 +13,5 @@ struct BinaryTreeNode
 
 void PrintTree(const BinaryTreeNode* pRoot);
 void DestroyTree(const BinaryTreeNode* pRoot);
+BinaryTreeNode* CreateBinaryTreeNode(int value);
+void ConnectTreeNodes(BinaryTreeNode* root, BinaryTreeNode* left, BinaryTreeNode* right);
