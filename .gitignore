@@ -3,4 +3,5 @@
 *.log
 *.so
 *.a
+.vscode/*
 
