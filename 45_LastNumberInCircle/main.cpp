@@ -36,6 +36,7 @@ ListNode* CreatList(int n)
 
 
 
+// construct list 
 int LastRemaining_Solution1(unsigned int n, unsigned int m)
 {
     if(n == 1) return 0;
@@ -66,33 +67,44 @@ int LastRemaining_Solution1(unsigned int n, unsigned int m)
 
     return pMy->m_Value;
 
-    // list<unsigned int> array;
-    // for(int i=0; i<n; i++)
-    // {
-	//     array.push_back(i);
-    // }
-
-    // auto it_c = array.begin(); 
-    // while(array.size() > 1)
-    // {
-    //     int tmp = m;
-    //     while(--tmp)
-    //     {
-    //         it_c++;
-    //         if(it_c == array.end())
-    //             it_c = array.begin(); 
-            
-    //     }
-    
-    //     it_c = array.erase(it_c);
-    // }
-    // return array.front();
-
-
-
-
 }
 
+
+// take use of standard <list> lib
+// int LastRemaining_Solution1(unsigned int n, unsigned int m)
+// {
+//     if (n == 1)
+//         return 0;
+//     if (n <= 0)
+//         return -1;
+//     if (m <= 0)
+//         return -1;
+
+//     list<unsigned int> array;
+//     for (int i = 0; i < n; i++)
+//     {
+//         array.push_back(i);
+//     }
+
+//     auto it = array.begin();
+
+//     while (array.size() > 1)
+//     {
+//         int tmp = m;
+//         while (--tmp)
+//         {
+//             it++;
+//             if (it == array.end())
+//                 it = array.begin();
+//         }
+
+//         it = array.erase(it);
+//         if(it == array.end())
+//             it=array.begin(); // the iterator to be erased can be the last , the it will move to end()
+//     }
+
+//     return array.front();
+// }
 
 
 int LastRemaining_Solution2(unsigned int n, unsigned int m)
