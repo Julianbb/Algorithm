@@ -5,7 +5,7 @@
 #   Email         : 15544925950@163.com
 #   File Name     : main.cpp
 #   Last Modified : 2019-07-30 10:23
-#   Describe      :
+#   Describe      : 剑指Offer
 #
 # ====================================================*/
 
@@ -13,27 +13,23 @@
 using namespace std;
 
 
-void scanDigits(const char** str)
+bool scanUnsignedInteger(const char** str)
 {
+    const char* Before = *str;
+
     while(**str != 0 && **str >='0' && **str <='9')
 	++(*str);
+
+    return *str > Before;
 }
 
-bool isExponential(const char** str)
+
+
+bool scanInteger(const char** str)
 {
-    if(**str != 'e'&& **str != 'E')
-	return false;
-
-    ++(*str);
-
     if(**str == '+' || **str == '-')
 	++(*str);
-
-    if(**str == 0)
-	return false;
-
-    scanDigits(str);
-    return (**str == 0 ? true : false);
+    return scanUnsignedInteger(str);
 }
 
 
@@ -43,35 +39,21 @@ bool isNumeric(const char* str)
     if(str == nullptr)
 	return false;
 
-    if(*str == '+' || *str == '-')
-	++str;
+    bool numberic = scanInteger(&str);
 
-    if(*str == 0)
-	return false;
-
-    bool numberic = true;
-    scanDigits(&str);
-
-    if(*str != 0)
+    if(*str == '.')
     {
-	if(*str == '.')
-	{
-	    ++str;
-	    if(*str < '0' || *str >'9') // .后面没有数字
-		return false;
-	    scanDigits(&str);
-	    if(*str == 'e' || *str == 'E')
-		numberic = isExponential(&str);
-	}
-	else if(*str == 'e' || *str == 'E')
-	{
-	    numberic = isExponential(&str);
-	}
-	else
-	    numberic = false;
+	++str;
+	numberic = scanUnsignedInteger(&str) || numberic;
     }
 
-    return numberic && (*str == 0);
+    if(*str == 'e' || *str == 'E')
+    {
+	++str;
+	numberic = scanInteger(&str) && numberic;
+    }
+
+    return numberic && *str == 0;
 }
 
 
@@ -97,7 +79,7 @@ int main(int argc, char* argv[])
     Test("Test3", "+500", true);
     Test("Test4", "5e2", true);
     Test("Test5", "3.1416", true);
-    Test("Test6", "600.", false);
+    Test("Test6", "600.", true);
     Test("Test7", "-.123", true);
     Test("Test8", "-1E-16", true);
     Test("Test9", "1.79769313486232E+308", true);
