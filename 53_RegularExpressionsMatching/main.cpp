@@ -13,9 +13,9 @@
 #include <string>
 using namespace std;
 
-bool matchCore(char* str, char* pattern);
+bool matchCore(const char* str, const char* pattern);
 
-bool match(char* str,char* pattern)
+bool match(const char* str,const char* pattern)
 {
    if(str == nullptr || pattern == nullptr)
       return false;
@@ -25,7 +25,7 @@ bool match(char* str,char* pattern)
 }
 
 
-bool matchCore(char* str, char* pattern)
+bool matchCore(const char* str, const char* pattern)
 {
     if(*str == 0 && *pattern == 0)
 	return true;
@@ -50,7 +50,7 @@ bool matchCore(char* str, char* pattern)
 
 // ==================== Test Code ====================
 
-void Test(const char* testName, char* str,char* pattern, bool expected)
+void Test(const char* testName, const char* str,const char* pattern, bool expected)
 {
     if(testName != NULL)
         printf("%s begins: ", testName);
