@@ -17,21 +17,48 @@
 using namespace std;
 
 
+// 剑指Offer 参考 
+
+// bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
+// {
+//     if(pRoot1 == nullptr && pRoot2 == nullptr)
+//         return true;
+
+//     if(pRoot1 == nullptr || pRoot2 == nullptr)
+//         return false;
+
+//     if(pRoot1->m_nValue != pRoot2->m_nValue)
+//         return false;
+
+//     return isSymmetrical(pRoot1->m_pLeft, pRoot2->m_pRight)
+//         && isSymmetrical(pRoot1->m_pRight, pRoot2->m_pLeft);
+// }
+
+
+// bool isSymmetrical(BinaryTreeNode* pRoot)
+// {
+//     return isSymmetrical(pRoot, pRoot);
+// }
+
+
+
+
+
 void GetMidOrder(BinaryTreeNode* pRoot, deque<BinaryTreeNode*>& result, int* num)
 {
 
     if(pRoot->m_pRight == nullptr && pRoot->m_pLeft== nullptr)
     {
-        result.push_back(pRoot);
-        (*num)++;
-        return;
+	result.push_back(pRoot);
+	(*num)++;
+	return;
     }
 
-	if(pRoot->m_pLeft == nullptr) 
+	if(pRoot->m_pLeft == nullptr)
     {
-        (*num)++;
-        result.push_back(nullptr); 
- 
+	(*num)++;
+	result.push_back(nullptr);
+
     }
 
     if(pRoot->m_pLeft != nullptr)
@@ -44,12 +71,12 @@ void GetMidOrder(BinaryTreeNode* pRoot, deque<BinaryTreeNode*>& result, int* num
 
 
 
-    if(pRoot->m_pRight == nullptr) 
+    if(pRoot->m_pRight == nullptr)
     {
-        (*num)++;
-        result.push_back(nullptr);
-        return;
-    }  
+	(*num)++;
+	result.push_back(nullptr);
+	return;
+    }
     GetMidOrder(pRoot->m_pRight, result, num);
 }
 
@@ -57,7 +84,7 @@ void GetMidOrder(BinaryTreeNode* pRoot, deque<BinaryTreeNode*>& result, int* num
 bool isSymmetrical(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr) return true;
-    
+
     deque<BinaryTreeNode*> array_tree;
     int number = 0;
 
@@ -69,29 +96,29 @@ bool isSymmetrical(BinaryTreeNode* pRoot)
 
     for(int i=0; i<mid; i++)
     {
-        BinaryTreeNode* node = array_tree.front();
-        array_tree.pop_front();
-        stack_tree.push(node);
+	BinaryTreeNode* node = array_tree.front();
+	array_tree.pop_front();
+	stack_tree.push(node);
     }
 
     array_tree.pop_front(); //把中间的pop出去
 
     for(int i=0; i<mid; i++)
     {
-        BinaryTreeNode* node = stack_tree.top();
-        stack_tree.pop();
+	BinaryTreeNode* node = stack_tree.top();
+	stack_tree.pop();
 
-        if(node == nullptr && array_tree[i] == nullptr) 
-            continue;
-        
-        if(node == nullptr || array_tree[i] == nullptr)
-        {
-            return false;
-        }
-        if(node->m_nValue != array_tree[i]->m_nValue)
-        {
-            return false;
-        }
+	if(node == nullptr && array_tree[i] == nullptr)
+	    continue;
+
+	if(node == nullptr || array_tree[i] == nullptr)
+	{
+	    return false;
+	}
+	if(node->m_nValue != array_tree[i]->m_nValue)
+	{
+	    return false;
+	}
     }
 
     return true;
