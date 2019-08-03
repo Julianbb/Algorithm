@@ -11,79 +11,133 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 #include "../Utilities/BinaryTree.h"
 using namespace std;
 
 
 
 
-void Sub_Print(vector<BinaryTreeNode*> array, int* num)
-{
-    int index = 0;
-    int step = 0;
-    
-    int fromRL_flag = 0;
+// Myself
+//
+// void Sub_Print(vector<BinaryTreeNode*> array, int* num)
+// {
+//     int index = 0;
+//     int step = 0;
 
-    while(num[index] != 0)
-    {
-	if(fromRL_flag % 2 == 0)
-	{
-	    for(int i=0; i<num[index]; i++)
-	    {
-		cout << array[i+step]->m_nValue << "  ";
-	    }
-	}
-	else
-	{
-	    for(int i=num[index]-1; i>=0; i--)
-	    {
-		cout << array[i+step]->m_nValue << "  ";
-	    }
-	}
-	
-	step += num[index];
-	cout << endl;
-	index++;
-	fromRL_flag++;
-    }
-}
+//     int fromRL_flag = 0;
+
+//     while(num[index] != 0)
+//     {
+//         if(fromRL_flag % 2 == 0)
+//         {
+//             for(int i=0; i<num[index]; i++)
+//             {
+//                 cout << array[i+step]->m_nValue << "  ";
+//             }
+//         }
+//         else
+//         {
+//             for(int i=num[index]-1; i>=0; i--)
+//             {
+//                 cout << array[i+step]->m_nValue << "  ";
+//             }
+//         }
+
+//         step += num[index];
+//         cout << endl;
+//         index++;
+//         fromRL_flag++;
+//     }
+// }
 
 
+// void Print(BinaryTreeNode* pRoot)
+// {
+//     if(pRoot == nullptr) return;
+//     vector<BinaryTreeNode*> Array;
+//     int num[100] = {0};
+
+
+//     num[0] = 1; // 一层里结点的数量
+//     Array.push_back(pRoot);
+//     int index = 0; // 层
+
+
+//     int step = 0; //当前遍历到的结点　
+
+//     while(num[index] != 0)
+//     {
+//         int tmp = index;
+//         index++;
+//         for(int i=0; i<num[tmp]; i++) // 遍历当前层每个结点，有子节点就放在Array后面,同时更新当前层结点数
+//         {
+//             if(Array[step]->m_pLeft != nullptr)
+//             {
+//                 Array.push_back(Array[step]->m_pLeft);
+//                 num[index]++;
+//             }
+//             if(Array[step]->m_pRight != nullptr)
+//             {
+//                 Array.push_back(Array[step]->m_pRight);
+//                 num[index]++;
+//             }
+//             step++;
+//         }
+//     }
+
+//     Sub_Print(Array, num); // 打印
+// }
+
+
+// thought from Offer
 void Print(BinaryTreeNode* pRoot)
 {
-    if(pRoot == nullptr) return;
-    vector<BinaryTreeNode*> Array;
-    int num[100] = {0};
+    if(pRoot == nullptr)
+	return;
+
+    stack<BinaryTreeNode*> s[2];
+
+    int flag = 0;
+    int tmp = 0;
+
+    cout << pRoot->m_nValue << endl;
+    if(pRoot->m_pLeft != nullptr) s[0].push(pRoot->m_pLeft);
+    if(pRoot->m_pRight != nullptr) s[0].push(pRoot->m_pRight);
 
 
-    num[0] = 1; // 一层里结点的数量
-    Array.push_back(pRoot);
-    int index = 0; // 层
-
-
-    int step = 0; //当前遍历到的结点　 
-
-    while(num[index] != 0)
+    while(s[tmp].size()!=0)
     {
-	int tmp = index;
-	index++;
-	for(int i=0; i<num[tmp]; i++) // 遍历当前层每个结点，有子节点就放在Array后面,同时更新当前层结点数
+	int size = s[tmp].size();
+	for(int i=0; i<size; i++)
 	{
-	    if(Array[step]->m_pLeft != nullptr)
+	    BinaryTreeNode* node = s[tmp].top();
+	    s[tmp].pop();
+	    cout << node->m_nValue << " " ;
+
+	    if(tmp == 0)
 	    {
-		Array.push_back(Array[step]->m_pLeft);
-		num[index]++;
+		if(node->m_pRight != nullptr)
+		s[tmp+1].push(node->m_pRight);
+
+		if(node->m_pLeft != nullptr)
+		s[tmp+1].push(node->m_pLeft);
 	    }
-	    if(Array[step]->m_pRight != nullptr)
+	    else
 	    {
-		Array.push_back(Array[step]->m_pRight);
-		num[index]++;
-	    }
-	    step++;
+		if(node->m_pLeft != nullptr)
+		s[tmp-1].push(node->m_pLeft);
+
+		if(node->m_pRight != nullptr)
+		s[tmp-1].push(node->m_pRight);
+
+	    }	
 	}
+	flag++;
+	tmp = flag%2;
+	cout << endl;
     }
 
-    Sub_Print(Array, num); // 打印
 }
 
 
