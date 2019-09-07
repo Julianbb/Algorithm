@@ -1,32 +1,54 @@
 #include <iostream>
 using namespace std;
 
-
-
-
 bool FindNumber(int* array, int rows, int cols, int number)
 {
-	if(array == NULL || rows<=0 || cols<=0) return false;
-	int i = cols -1;
-	int j = 0;
-	
-	while(i>=0 && i<rows && j>=0 && j<cols)
-	{
-		if(array[i*cols+j] == number) 
-			return true;
+    if(array == NULL || rows<=0 || cols<=0) return false;
 
-		if(number > array[i*cols+j])
-		{
-			j++;
-		}
-		else
-		{
-			i--;
-		}
+    int i=3;
+    int j=0;
 
-	}
-	return false;
-} 
+    while(i>=0 && i<=3 && j>=0&& j<=3)
+    {
+	if(*(array+i*4+j) == number)
+	    return true;
+
+	if(*(array+i*4+j) > number)
+	    i--;
+	if(*(array+i*4+j) < number)
+	    j++;
+    }
+
+    return false;
+
+
+}
+
+
+
+// bool FindNumber(int* array, int rows, int cols, int number)
+// {
+//         if(array == NULL || rows<=0 || cols<=0) return false;
+//         int i = cols -1;
+//         int j = 0;
+
+//         while(i>=0 && i<rows && j>=0 && j<cols)
+//         {
+//                 if(array[i*cols+j] == number)
+//                         return true;
+
+//                 if(number > array[i*cols+j])
+//                 {
+//                         j++;
+//                 }
+//                 else
+//                 {
+//                         i--;
+//                 }
+
+//         }
+//         return false;
+// }
 
 //  1   2   8   9
 //  2   4   9   12
@@ -36,7 +58,7 @@ bool FindNumber(int* array, int rows, int cols, int number)
 void Test1(void)
 {
 	int array[4][4] = {{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}};
-	bool result = FindNumber(*array, 4, 4, 7);
+	bool result = FindNumber(&array[0][0], 4, 4, 7);
 	if(result == true)
 		cout << "Test1 passed" << endl;
 	else
