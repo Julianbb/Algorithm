@@ -73,7 +73,7 @@ void Test1(void)
 void Test2(void)
 {
 	int array[4][4] = {{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}};
-	bool result = FindNumber(*array, 4, 4, 3);
+	bool result = FindNumber((int*)(&array), 4, 4, 3);
 	if(result == false)
 		cout << "Test2 passed" << endl;
 	else
