@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 bool FindNumber(int* array, int rows, int cols, int number)
