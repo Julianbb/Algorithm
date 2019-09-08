@@ -1,0 +1,189 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ATreeHasBTree	18_SubstructureTree/main.cpp	/^bool ATreeHasBTree(BinaryTreeNode* A, BinaryTreeNode* B)$/;"	f
+AddToTail	Utilities/List.cpp	/^void AddToTail(ListNode** pHead, int value)$/;"	f
+BinaryTreeNode	Utilities/BinaryTree.h	/^struct BinaryTreeNode$/;"	s
+CQueue	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^CQueue<T>::CQueue(void)$/;"	f	class:CQueue
+CQueue	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^class CQueue$/;"	c
+CheckAfterFindBRootInA	18_SubstructureTree/main.cpp	/^bool CheckAfterFindBRootInA(BinaryTreeNode* p1, BinaryTreeNode* p2)$/;"	f
+CommomPower	11_Power/main.cpp	/^typedef double CommomPower(double, int);$/;"	t	file:
+CommomPower_way1	11_Power/main.cpp	/^double CommomPower_way1(double base, int exponent)$/;"	f
+CommomPower_way2	11_Power/main.cpp	/^double CommomPower_way2(double base, int exponent)$/;"	f
+ConnectListNodes	Utilities/List.cpp	/^void ConnectListNodes(ListNode* pCurrent, ListNode* pNext)$/;"	f
+ConnectTreeNodes	Utilities/BinaryTree.cpp	/^void ConnectTreeNodes(BinaryTreeNode* root, BinaryTreeNode* left, BinaryTreeNode* right)$/;"	f
+Construct	06_ConstrctBinaryTree/ConstructTree.cpp	/^BinaryTreeNode* Construct(int* preorder, int* inorder, int length)$/;"	f
+ConstructCore	06_ConstrctBinaryTree/ConstructTree.cpp	/^BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, int* startInorder, int* endInorder)$/;"	f
+CreateBinaryTreeNode	Utilities/BinaryTree.cpp	/^BinaryTreeNode* CreateBinaryTreeNode(int value)$/;"	f
+CreateListNode	Utilities/List.cpp	/^ListNode* CreateListNode(int value)$/;"	f
+DeleteNode	13_DeleteNodeInList/main.cpp	/^void DeleteNode(ListNode** pHead, ListNode* pNode)$/;"	f
+DestroyList	Utilities/List.cpp	/^void DestroyList(ListNode* pHead)$/;"	f
+DestroyTree	Utilities/BinaryTree.cpp	/^void DestroyTree(const BinaryTreeNode* pRoot)$/;"	f
+Equal	11_Power/main.cpp	/^bool Equal(double num1, double num2)$/;"	f
+FUN	10_NumberOfInBinary/main.cpp	/^typedef int FUN(int); $/;"	t	file:
+FUN	16_RevertList/main.cpp	/^typedef ListNode*(FUN)(ListNode*);$/;"	t	file:
+FUN	17_MergeSortLists/main.cpp	/^typedef ListNode* (*FUN)(ListNode*, ListNode*);$/;"	t	file:
+FUN	19_MirrorOfBinaryTree/main.cpp	/^typedef int (*FUN)(BinaryTreeNode*);$/;"	t	file:
+Fibonacci	09_Fibonacci/main.cpp	/^int Fibonacci(int number)$/;"	f
+FindKthNode	15_KthNodeFromEnd/main.cpp	/^ListNode* FindKthNode(ListNode* head, int k)$/;"	f
+FindNumber	03_FindInPartiallySortedMatrix/main.cpp	/^bool FindNumber(int* array, int rows, int cols, int number)$/;"	f
+Fun	14_ReOrderArray/ReOrderArray_2.cpp	/^typedef bool Fun(int);$/;"	t	file:
+Increase	12_Print1ToMaxOfDigits/main_common.cpp	/^bool Increase(char* number)$/;"	f
+IsPopOrder	22_StackPushPopOrder/main.cpp	/^bool IsPopOrder(const int* pPush, const int* pPop, int length)$/;"	f
+ListNode	Utilities/List.h	/^struct ListNode$/;"	s
+MergeLists_Loop	17_MergeSortLists/main.cpp	/^ListNode* MergeLists_Loop(ListNode* node1, ListNode* node2)$/;"	f
+MergeLists_Recurse	17_MergeSortLists/main.cpp	/^ListNode* MergeLists_Recurse(ListNode* node1, ListNode* node2)$/;"	f
+Min	08_MinNumberInRotatedArray/test.cpp	/^int Min(int* numbers, int length)$/;"	f
+MinInOrder	08_MinNumberInRotatedArray/test.cpp	/^int MinInOrder(int* numbers, int start, int end)$/;"	f
+MirrorBinaryTree_Loop	19_MirrorOfBinaryTree/main.cpp	/^int MirrorBinaryTree_Loop(BinaryTreeNode* root)$/;"	f
+MirrorBinaryTree_Recurse	19_MirrorOfBinaryTree/main.cpp	/^int MirrorBinaryTree_Recurse(BinaryTreeNode* root)$/;"	f
+MyPower	11_Power/main.cpp	/^double MyPower(double base, int exponent, CommomPower* way)$/;"	f
+Numof1InBinaty_way1	10_NumberOfInBinary/main.cpp	/^int Numof1InBinaty_way1(int num)$/;"	f
+Numof1InBinaty_way2	10_NumberOfInBinary/main.cpp	/^int Numof1InBinaty_way2(int num)$/;"	f
+Numof1InBinaty_way3	10_NumberOfInBinary/main.cpp	/^int Numof1InBinaty_way3(int num)$/;"	f
+Print1ToMaxOfNDigits	12_Print1ToMaxOfDigits/main2_recursively.cpp	/^void Print1ToMaxOfNDigits(int n)$/;"	f
+Print1ToMaxOfNDigits	12_Print1ToMaxOfDigits/main_common.cpp	/^void Print1ToMaxOfNDigits(int n)$/;"	f
+Print1ToMaxOfNDigitsRecursively	12_Print1ToMaxOfDigits/main2_recursively.cpp	/^void Print1ToMaxOfNDigitsRecursively(char* number, int index)$/;"	f
+Print2DArray	20_ClockwisePrintMatrix/main2.cpp	/^void Print2DArray(int* array, int rows, int cols)$/;"	f
+PrintArray	14_ReOrderArray/ReOrderArray_1.cpp	/^void PrintArray(int* array, int length)$/;"	f
+PrintArray	14_ReOrderArray/ReOrderArray_2.cpp	/^void PrintArray(int* array, int length)$/;"	f
+PrintArray_Clockwise	20_ClockwisePrintMatrix/main2.cpp	/^void PrintArray_Clockwise(int* array, int rows, int cols, int flag=0)$/;"	f
+PrintList	Utilities/List.cpp	/^void PrintList(ListNode* head)$/;"	f
+PrintListNode	Utilities/List.cpp	/^void PrintListNode(ListNode* node)$/;"	f
+PrintNumber	12_Print1ToMaxOfDigits/main2_recursively.cpp	/^void PrintNumber(char* number)$/;"	f
+PrintNumber	12_Print1ToMaxOfDigits/main_common.cpp	/^void PrintNumber(char* number)$/;"	f
+PrintTree	23_PrintTreeFromTopToBottom/main.cpp	/^void PrintTree(BinaryTreeNode* root)$/;"	f
+PrintTree	Utilities/BinaryTree.cpp	/^void PrintTree(const BinaryTreeNode* pRoot)$/;"	f
+PrintTreeNode	Utilities/BinaryTree.cpp	/^void PrintTreeNode(const BinaryTreeNode* pNode)$/;"	f
+ReOrderArray	14_ReOrderArray/ReOrderArray_1.cpp	/^void ReOrderArray(int* array, int length)$/;"	f
+ReOrderArray	14_ReOrderArray/ReOrderArray_2.cpp	/^void ReOrderArray(int* array, int length, Fun* fun)$/;"	f
+RemoveNode	Utilities/List.cpp	/^void RemoveNode(ListNode** pHead, int value)$/;"	f
+RevertList_3p	16_RevertList/main.cpp	/^ListNode* RevertList_3p(ListNode* head)$/;"	f
+RevertList_TwoNode	16_RevertList/main.cpp	/^ListNode* RevertList_TwoNode(ListNode* node1, ListNode* node2)$/;"	f
+RevertList_recurse	16_RevertList/main.cpp	/^ListNode* RevertList_recurse(ListNode* head)$/;"	f
+StackWithMin	21_MinInStack/stack_with_min.hpp	/^    StackWithMin(){}$/;"	f	class:StackWithMin
+StackWithMin	21_MinInStack/stack_with_min.hpp	/^class StackWithMin$/;"	c
+Test	06_ConstrctBinaryTree/test.cpp	/^void Test(const char* testName, int* preorder, int* inorder, int length)$/;"	f
+Test	07_QueueWithTwoStacks/test.cpp	/^void Test(char actual, char expected)$/;"	f
+Test	09_Fibonacci/main.cpp	/^void Test(void)$/;"	f
+Test	10_NumberOfInBinary/main.cpp	/^void Test(FUN* Numof1InBinaty_way)$/;"	f
+Test	12_Print1ToMaxOfDigits/main2_recursively.cpp	/^void Test(void)$/;"	f
+Test	12_Print1ToMaxOfDigits/main_common.cpp	/^void Test(void)$/;"	f
+Test	13_DeleteNodeInList/main.cpp	/^void Test(ListNode** pHead, ListNode* pNode)$/;"	f
+Test	21_MinInStack/main.cpp	/^void Test(const char* test, const StackWithMin<int>& stack, int expected)$/;"	f
+Test	22_StackPushPopOrder/main.cpp	/^void Test(const char* test, const int* pPush, const int* pPop, int length,  bool expected)$/;"	f
+Test	23_PrintTreeFromTopToBottom/main.cpp	/^int* Test(const char* test, BinaryTreeNode* root)$/;"	f
+Test1	03_FindInPartiallySortedMatrix/main.cpp	/^void Test1(void)$/;"	f
+Test1	06_ConstrctBinaryTree/test.cpp	/^void Test1()$/;"	f
+Test1	08_MinNumberInRotatedArray/test.cpp	/^void Test1(void)$/;"	f
+Test1	11_Power/main.cpp	/^void Test1(void)$/;"	f
+Test1	13_DeleteNodeInList/main.cpp	/^void Test1(void)$/;"	f
+Test1	14_ReOrderArray/ReOrderArray_1.cpp	/^void Test1(void)$/;"	f
+Test1	14_ReOrderArray/ReOrderArray_2.cpp	/^void Test1(void)$/;"	f
+Test1	15_KthNodeFromEnd/main.cpp	/^void Test1()$/;"	f
+Test1	16_RevertList/main.cpp	/^void Test1(FUN* RevertList)$/;"	f
+Test1	17_MergeSortLists/main.cpp	/^void Test1(FUN MergeLists)$/;"	f
+Test1	18_SubstructureTree/main.cpp	/^void Test1()$/;"	f
+Test1	19_MirrorOfBinaryTree/main.cpp	/^void Test1(FUN MirrorBinaryTree)$/;"	f
+Test1	20_ClockwisePrintMatrix/main2.cpp	/^void Test1()$/;"	f
+Test1	22_StackPushPopOrder/main.cpp	/^void Test1(void)$/;"	f
+Test1	23_PrintTreeFromTopToBottom/main.cpp	/^void Test1(void)$/;"	f
+Test2	03_FindInPartiallySortedMatrix/main.cpp	/^void Test2(void)$/;"	f
+Test2	06_ConstrctBinaryTree/test.cpp	/^void Test2()$/;"	f
+Test2	08_MinNumberInRotatedArray/test.cpp	/^void Test2(void)$/;"	f
+Test2	11_Power/main.cpp	/^void Test2(void)$/;"	f
+Test2	13_DeleteNodeInList/main.cpp	/^void Test2(void)$/;"	f
+Test2	15_KthNodeFromEnd/main.cpp	/^void Test2()$/;"	f
+Test2	16_RevertList/main.cpp	/^void Test2(FUN* RevertList)$/;"	f
+Test2	17_MergeSortLists/main.cpp	/^void Test2(FUN MergeLists)$/;"	f
+Test2	18_SubstructureTree/main.cpp	/^void Test2()$/;"	f
+Test2	19_MirrorOfBinaryTree/main.cpp	/^void Test2(FUN MirrorBinaryTree)$/;"	f
+Test2	20_ClockwisePrintMatrix/main2.cpp	/^void Test2()$/;"	f
+Test2	22_StackPushPopOrder/main.cpp	/^void Test2(void)$/;"	f
+Test3	03_FindInPartiallySortedMatrix/main.cpp	/^void Test3(void)$/;"	f
+Test3	06_ConstrctBinaryTree/test.cpp	/^void Test3()$/;"	f
+Test3	08_MinNumberInRotatedArray/test.cpp	/^void Test3(void)$/;"	f
+Test3	11_Power/main.cpp	/^void Test3(void)$/;"	f
+Test3	13_DeleteNodeInList/main.cpp	/^void Test3(void)$/;"	f
+Test3	15_KthNodeFromEnd/main.cpp	/^void Test3()$/;"	f
+Test3	16_RevertList/main.cpp	/^void Test3(FUN* RevertList)$/;"	f
+Test3	17_MergeSortLists/main.cpp	/^void Test3(FUN MergeLists)$/;"	f
+Test3	18_SubstructureTree/main.cpp	/^void Test3()$/;"	f
+Test3	19_MirrorOfBinaryTree/main.cpp	/^void Test3(FUN MirrorBinaryTree)$/;"	f
+Test3	20_ClockwisePrintMatrix/main2.cpp	/^void Test3()$/;"	f
+Test3	22_StackPushPopOrder/main.cpp	/^void Test3(void)$/;"	f
+Test4	03_FindInPartiallySortedMatrix/main.cpp	/^void Test4(void)$/;"	f
+Test4	06_ConstrctBinaryTree/test.cpp	/^void Test4()$/;"	f
+Test4	08_MinNumberInRotatedArray/test.cpp	/^void Test4(void)$/;"	f
+Test4	11_Power/main.cpp	/^void Test4(void)$/;"	f
+Test4	13_DeleteNodeInList/main.cpp	/^void Test4(void)$/;"	f
+Test4	15_KthNodeFromEnd/main.cpp	/^void Test4()$/;"	f
+Test4	17_MergeSortLists/main.cpp	/^void Test4(FUN MergeLists)$/;"	f
+Test4	18_SubstructureTree/main.cpp	/^void Test4(void)$/;"	f
+Test4	19_MirrorOfBinaryTree/main.cpp	/^void Test4(FUN MirrorBinaryTree)$/;"	f
+Test4	20_ClockwisePrintMatrix/main2.cpp	/^void Test4()$/;"	f
+Test4	22_StackPushPopOrder/main.cpp	/^void Test4(void)$/;"	f
+Test5	03_FindInPartiallySortedMatrix/main.cpp	/^void Test5(void)$/;"	f
+Test5	06_ConstrctBinaryTree/test.cpp	/^void Test5()$/;"	f
+Test5	08_MinNumberInRotatedArray/test.cpp	/^void Test5(void)$/;"	f
+Test5	11_Power/main.cpp	/^void Test5(void)$/;"	f
+Test5	15_KthNodeFromEnd/main.cpp	/^void Test5()$/;"	f
+Test5	20_ClockwisePrintMatrix/main2.cpp	/^void Test5()$/;"	f
+Test5	22_StackPushPopOrder/main.cpp	/^void Test5(void)$/;"	f
+Test6	03_FindInPartiallySortedMatrix/main.cpp	/^void Test6(void)$/;"	f
+Test6	06_ConstrctBinaryTree/test.cpp	/^void Test6()$/;"	f
+Test6	20_ClockwisePrintMatrix/main2.cpp	/^void Test6()$/;"	f
+Test6	22_StackPushPopOrder/main.cpp	/^void Test6(void)$/;"	f
+Test7	03_FindInPartiallySortedMatrix/main.cpp	/^void Test7(void)$/;"	f
+Test7	06_ConstrctBinaryTree/test.cpp	/^void Test7()$/;"	f
+Test7	20_ClockwisePrintMatrix/main2.cpp	/^void Test7()$/;"	f
+Test7	22_StackPushPopOrder/main.cpp	/^void Test7(void)$/;"	f
+Test8	20_ClockwisePrintMatrix/main2.cpp	/^void Test8()$/;"	f
+Top	21_MinInStack/stack_with_min.hpp	/^T& StackWithMin<T>::Top()$/;"	f	class:StackWithMin
+__LIST_H	Utilities/List.h	2;"	d
+appendTail	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^void CQueue<T>::appendTail(const T& node)$/;"	f	class:CQueue
+deleteHead	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^T CQueue<T>::deleteHead()$/;"	f	class:CQueue
+empty	21_MinInStack/stack_with_min.hpp	/^bool StackWithMin<T>::empty() const$/;"	f	class:StackWithMin
+function1	14_ReOrderArray/ReOrderArray_2.cpp	/^bool function1(int data)$/;"	f
+function2	14_ReOrderArray/ReOrderArray_2.cpp	/^bool function2(int data)$/;"	f
+m_Value	Utilities/List.h	/^    int m_Value;$/;"	m	struct:ListNode
+m_data	21_MinInStack/stack_with_min.hpp	/^    std::stack<T> m_data;$/;"	m	class:StackWithMin
+m_min	21_MinInStack/stack_with_min.hpp	/^    std::stack<T> m_min;$/;"	m	class:StackWithMin
+m_nValue	Utilities/BinaryTree.h	/^    int m_nValue;$/;"	m	struct:BinaryTreeNode
+m_pLeft	Utilities/BinaryTree.h	/^    BinaryTreeNode* m_pLeft;$/;"	m	struct:BinaryTreeNode
+m_pNext	Utilities/List.h	/^    ListNode* m_pNext;$/;"	m	struct:ListNode
+m_pRight	Utilities/BinaryTree.h	/^    BinaryTreeNode* m_pRight;$/;"	m	struct:BinaryTreeNode
+main	03_FindInPartiallySortedMatrix/main.cpp	/^int main(void)$/;"	f
+main	06_ConstrctBinaryTree/test.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	07_QueueWithTwoStacks/test.cpp	/^int main(int argc, char** argv)$/;"	f
+main	08_MinNumberInRotatedArray/test.cpp	/^int main(void)$/;"	f
+main	09_Fibonacci/main.cpp	/^int main(void)$/;"	f
+main	10_NumberOfInBinary/main.cpp	/^int main(void)$/;"	f
+main	11_Power/main.cpp	/^int main(void)$/;"	f
+main	12_Print1ToMaxOfDigits/main2_recursively.cpp	/^int main(void)$/;"	f
+main	12_Print1ToMaxOfDigits/main_common.cpp	/^int main(void)$/;"	f
+main	13_DeleteNodeInList/main.cpp	/^int main(void)$/;"	f
+main	14_ReOrderArray/ReOrderArray_1.cpp	/^int main(void)$/;"	f
+main	14_ReOrderArray/ReOrderArray_2.cpp	/^int main(void)$/;"	f
+main	15_KthNodeFromEnd/main.cpp	/^int main(void)$/;"	f
+main	16_RevertList/main.cpp	/^int main(void)$/;"	f
+main	17_MergeSortLists/main.cpp	/^int main(void)$/;"	f
+main	18_SubstructureTree/main.cpp	/^int main(void)$/;"	f
+main	19_MirrorOfBinaryTree/main.cpp	/^int main(void)$/;"	f
+main	20_ClockwisePrintMatrix/main2.cpp	/^int main(void)$/;"	f
+main	21_MinInStack/main.cpp	/^int main(void)$/;"	f
+main	22_StackPushPopOrder/main.cpp	/^int main(void)$/;"	f
+main	23_PrintTreeFromTopToBottom/main.cpp	/^int main(void)$/;"	f
+min	21_MinInStack/stack_with_min.hpp	/^const T& StackWithMin<T>::min() const$/;"	f	class:StackWithMin
+pop	21_MinInStack/stack_with_min.hpp	/^void StackWithMin<T>::pop()$/;"	f	class:StackWithMin
+push	21_MinInStack/stack_with_min.hpp	/^void StackWithMin<T>::push(const T& value)$/;"	f	class:StackWithMin
+size	21_MinInStack/stack_with_min.hpp	/^int StackWithMin<T>::size() const$/;"	f	class:StackWithMin
+stack1	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^    stack<T> stack1;$/;"	m	class:CQueue
+stack2	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^    stack<T> stack2;$/;"	m	class:CQueue
+top	21_MinInStack/stack_with_min.hpp	/^const T& StackWithMin<T>::top() const$/;"	f	class:StackWithMin
+valueInvalid	11_Power/main.cpp	/^bool valueInvalid = false;$/;"	v
+~CQueue	07_QueueWithTwoStacks/QueueWith2Stacks.hpp	/^CQueue<T>::~CQueue(void)$/;"	f	class:CQueue
+~StackWithMin	21_MinInStack/stack_with_min.hpp	/^    ~StackWithMin(){}$/;"	f	class:StackWithMin
