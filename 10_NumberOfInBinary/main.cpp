@@ -26,19 +26,36 @@ int Numof1InBinaty_way1(int num)
 
 
 // 将tmp的最高位设置为１，每次右移num
+// int Numof1InBinaty_way2(int num)
+// {
+//     int count =0;
+//     int tmp = 0x80000000;
+//     while(num)
+//     {
+//         if(num & tmp)
+//             count++;
+//         num = num << 1;
+//     }
+
+//     return count;
+// }
+
+
+
 int Numof1InBinaty_way2(int num)
 {
-    int count =0;
-    int tmp = 0x80000000;
-    while(num)
+    int count = 0;
+    int tmp = 1;
+    for(int i=0; i<32; i++)
     {
-	if(num & tmp)
+	int x = num >> i;
+	if(tmp & x)
 	    count++;
-	num = num << 1;
     }
 
     return count;
 }
+
 
 
 
