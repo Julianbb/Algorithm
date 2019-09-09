@@ -2,47 +2,112 @@
 using namespace std;
 
 
-int MinInOrder(int* numbers, int start, int end)
+
+
+int MinOfSame(int* numbers, int start, int end)
 {
-    int min = numbers[start];
-    for(int i=start+1; i<=end; i++)
+    if(numbers == nullptr || start > end)
+	return -9999;
+
+    int min = 9999;
+    int length = end - start +1;
+    for(int i=0; i<length; i++)
     {
-	if(numbers[i]< min)
+	if(numbers[i] < min)
 	    min = numbers[i];
     }
+
     return min;
 }
 
 
-int Min(int* numbers, int length)
-{
-    if(numbers == NULL || length <= 0)
-	return -1;
 
-    int  start = 0; 
-    int  end = length-1;
-    int mid =(end+start)/2;
-    
-    while(numbers[start] >= numbers[end])
+
+int Min(int array[], int length)
+{
+    if(array == nullptr || length <= 0) return -1;
+
+    int start = 0;
+    int end = length - 1;
+
+    int mid = start;
+    while(array[start] >= array[end])
     {
-	if(end - start == 1)
+	if(end-start == 1)
 	{
+	    mid = end;
 	    break;
 	}
 
-	if(numbers[start]==numbers[end] && numbers[mid]==numbers[start])
-	    return MinInOrder(numbers, start, end);
+	mid = (start+end) >> 1;
 
-	if(numbers[start]<=numbers[mid])
+	if(array[start] == array[end] && array[mid] == array[start])
+	    return MinOfSame(array, start, end);
+
+	if(array[mid] >= array[start])
 	    start = mid;
-	if(numbers[end] >= numbers[mid])
+	if(array[mid] <= array[end])
 	    end = mid;
-	
-	mid = (end+start)/2;
     }
 
-    return numbers[end];
+    return array[mid];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int MinInOrder(int* numbers, int start, int end)
+// {
+//     int min = numbers[start];
+//     for(int i=start+1; i<=end; i++)
+//     {
+//         if(numbers[i]< min)
+//             min = numbers[i];
+//     }
+//     return min;
+// }
+
+
+// int Min(int* numbers, int length)
+// {
+//     if(numbers == NULL || length <= 0)
+//         return -1;
+
+//     int  start = 0;
+//     int  end = length-1;
+//     int mid =(end+start)/2;
+
+//     while(numbers[start] >= numbers[end])
+//     {
+//         if(end - start == 1)
+//         {
+//             break;
+//         }
+
+//         if(numbers[start]==numbers[end] && numbers[mid]==numbers[start])
+//             return MinInOrder(numbers, start, end);
+
+//         if(numbers[start]<=numbers[mid])
+//             start = mid;
+//         if(numbers[end] >= numbers[mid])
+//             end = mid;
+
+//         mid = (end+start)/2;
+//     }
+
+//     return numbers[end];
+// }
 
 
 

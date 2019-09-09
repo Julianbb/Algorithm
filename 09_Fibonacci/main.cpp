@@ -1,24 +1,48 @@
 #include <iostream>
 using namespace std;
 
-
 int Fibonacci(int number)
 {
+    // if(number <= 0)
+    //     return 0;
+    // if(number == 1)
+    //     return 1;
+
+    // return Fibonacci(number-1) + Fibonacci(number-2);
+
+
     if(number < 2)
 	return number;
 
-    int Num_2 = 0;
-    int Num_1 = 1;
+    int num2 =0;
+    int num1 =1;
     int result = 0;
-    for(int index=2;index<=number; index++)
+    for(int index = 2; index <=number; index++)
     {
-	result = Num_1+Num_2;
-	Num_2 = Num_1;
-	Num_1 = result; 
+	result = num1+num2;
+	num2 = num1;
+	num1 = result;
     }
-
     return result;
 }
+
+// int Fibonacci(int number)
+// {
+//     if(number < 2)
+//         return number;
+
+//     int Num_2 = 0;
+//     int Num_1 = 1;
+//     int result = 0;
+//     for(int index=2;index<=number; index++)
+//     {
+//         result = Num_1+Num_2;
+//         Num_2 = Num_1;
+//         Num_1 = result;
+//     }
+
+//     return result;
+// }
 
 
 
