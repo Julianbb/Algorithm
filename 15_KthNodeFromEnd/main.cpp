@@ -3,31 +3,57 @@
 using	namespace std;
 
 
-
 ListNode* FindKthNode(ListNode* head, int k)
 {
-    if(head == nullptr) return nullptr;
-    if(k <=0 ) return nullptr;
+    if(head == nullptr || k<=0) return nullptr;
 
-    ListNode* pt1;
-    ListNode* pt2;
-    pt1 = head;
-    pt2 = head;
+    ListNode* p1 = head;
+    ListNode* p2 = head;
+
     for(int i=0; i<k-1; i++)
     {
-	pt1 = pt1->m_pNext;
-	if(pt1->m_pNext == nullptr) // K> list.size()
-	    return nullptr;	    
+	if(p2->m_pNext != nullptr)
+	    p2 = p2->m_pNext;
+	else
+	    return nullptr;
     }
 
-    while(pt1->m_pNext != nullptr)// 退出则证明pt1到了最后
+    while(p2->m_pNext != nullptr)
     {
-	pt1 = pt1->m_pNext;
-	pt2 = pt2->m_pNext;
+	p1 = p1->m_pNext;
+	p2 = p2->m_pNext;
     }
-    
-    return pt2;
+
+    return p1;
+
 }
+
+
+
+// ListNode* FindKthNode(ListNode* head, int k)
+// {
+//     if(head == nullptr) return nullptr;
+//     if(k <=0 ) return nullptr;
+
+//     ListNode* pt1;
+//     ListNode* pt2;
+//     pt1 = head;
+//     pt2 = head;
+//     for(int i=0; i<k-1; i++)
+//     {
+//         pt1 = pt1->m_pNext;
+//         if(pt1->m_pNext == nullptr) // K> list.size()
+//             return nullptr;
+//     }
+
+//     while(pt1->m_pNext != nullptr)// 退出则证明pt1到了最后
+//     {
+//         pt1 = pt1->m_pNext;
+//         pt2 = pt2->m_pNext;
+//     }
+
+//     return pt2;
+// }
 
 
 
