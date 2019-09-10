@@ -18,38 +18,76 @@ bool Equal(double num1, double num2)
 
 
  
-double CommomPower_way1(double base, int exponent)
-{
-    double result = 1.0;
-    for(int i=0; i<exponent; i++)
-    {
-	result *= base;
-    }
-    return result;
-}
+// double CommomPower_way1(double base, int exponent)
+// {
+//     double result = 1.0;
+//     for(int i=0; i<exponent; i++)
+//     {
+//         result *= base;
+//     }
+//     return result;
+// }
 
 
 
 
-// 相对于way1，更加高效的方法
+// // 相对于way1，更加高效的方法
+// double CommomPower_way2(double base, int exponent)
+// {
+//     if(exponent == 1) return base;
+//     if(exponent == 0) return 1.0;
+
+//     double result = CommomPower_way2(base, exponent>>1); // 利用>>相当于　/2
+//     result *= result;
+//     if(exponent & 0x1 == 1)
+//         result *= base;
+
+//     return result;
+// }
+
+
+// // 考虑base为0, exponent<0, 和两者都为0的不合法的输入
+// double MyPower(double base, int exponent, CommomPower* way)
+// {
+
+//     if(Equal(base, 0.0) && exponent<=0)
+//     {
+//         valueInvalid = true;
+//         return 0.0;
+//     }
+//     else
+//     {
+//         if(exponent<0)
+//         {
+//             int tmp_exponent = -exponent;
+//             double tmp_result = way(base, tmp_exponent);
+//             return 1.0/tmp_result;
+//         }
+//         else
+//         {
+//             return way(base, exponent);
+//         }
+
+//     }
+// }
+
 double CommomPower_way2(double base, int exponent)
 {
-    if(exponent == 1) return base;
     if(exponent == 0) return 1.0;
-
-    double result = CommomPower_way2(base, exponent>>1); // 利用>>相当于　/2
+    
+    double result = CommomPower_way2(base, exponent >> 1);
     result *= result;
-    if(exponent & 0x1 == 1)
-	result *= base;
+
+    if(exponent & 0x01)
+	result *=base;
 
     return result;
 }
 
 
-// 考虑base为0, exponent<0, 和两者都为0的不合法的输入
+
 double MyPower(double base, int exponent, CommomPower* way)
 {
-
     if(Equal(base, 0.0) && exponent<=0)
     {
 	valueInvalid = true;
@@ -57,21 +95,17 @@ double MyPower(double base, int exponent, CommomPower* way)
     }
     else
     {
-	if(exponent<0)
+	if(exponent < 0)
 	{
-	    int tmp_exponent = -exponent;
-	    double tmp_result = way(base, tmp_exponent);
-	    return 1.0/tmp_result;
+	    int tmp = -exponent;
+	    return 1/way(base, tmp);
 	}
 	else
 	{
 	    return way(base, exponent);
 	}
-
     }
 }
-
-
 
 
 
