@@ -5,35 +5,80 @@ using namespace std;
 
 void DeleteNode(ListNode** pHead, ListNode* pNode)
 {
-    if(pHead == nullptr || *pHead == nullptr || pNode == nullptr) return;
-
-    if(*pHead == pNode && pNode->m_pNext ==nullptr)//一个结点,删除的就是头结点
+    if(*pHead == nullptr || pHead == nullptr ||pNode == nullptr) return;
+    if(*pHead == pNode && pNode->m_pNext != nullptr) // 头结点
     {
-	delete *pHead;
+	*pHead = (*pHead)->m_pNext;  
+	delete pNode;
+	return;
+    }
+    else if(*pHead == pNode && pNode->m_pNext == nullptr) //就一个节点
+    {
+	delete pNode;
 	*pHead = nullptr;
 	return;
     }
-    else if(pNode->m_pNext == nullptr) //删除的是尾结点
+
+    else if(pNode->m_pNext == nullptr) // 尾节点
     {
-	ListNode* nodeTmp = *pHead;
-	while(nodeTmp->m_pNext != pNode)
+	ListNode* node_tmp = *pHead;
+	while(node_tmp->m_pNext != pNode)
 	{
-	    nodeTmp = nodeTmp->m_pNext;
+	    node_tmp = node_tmp->m_pNext;
 	}
-	nodeTmp->m_pNext = nullptr;
+
+	node_tmp->m_pNext = nullptr;
 	delete pNode;
-	//pNode = nullptr; // 无效，不能改变函数外的pNode值, 当执行完此函数的时候，需要在函数外将pNode立即置NULL
     }
-    else//删除的是中间结点
+
+    else // 中间节点
     {
 	ListNode* tmp = pNode->m_pNext;
-	pNode->m_Value = pNode->m_pNext->m_Value;
-	pNode->m_pNext = pNode->m_pNext->m_pNext;
-
+	pNode->m_pNext = tmp->m_pNext;
+	pNode->m_Value = tmp->m_Value;
 	delete tmp;
-
     }
+
+
 }
+
+
+
+
+
+
+
+// void DeleteNode(ListNode** pHead, ListNode* pNode)
+// {
+//     if(pHead == nullptr || *pHead == nullptr || pNode == nullptr) return;
+
+//     if(*pHead == pNode && pNode->m_pNext ==nullptr)//一个结点,删除的就是头结点
+//     {
+//         delete *pHead;
+//         *pHead = nullptr;
+//         return;
+//     }
+//     else if(pNode->m_pNext == nullptr) //删除的是尾结点
+//     {
+//         ListNode* nodeTmp = *pHead;
+//         while(nodeTmp->m_pNext != pNode)
+//         {
+//             nodeTmp = nodeTmp->m_pNext;
+//         }
+//         nodeTmp->m_pNext = nullptr;
+//         delete pNode;
+//         //pNode = nullptr; // 无效，不能改变函数外的pNode值, 当执行完此函数的时候，需要在函数外将pNode立即置NULL
+//     }
+//     else//删除的是中间结点
+//     {
+//         ListNode* tmp = pNode->m_pNext;
+//         pNode->m_Value = pNode->m_pNext->m_Value;
+//         pNode->m_pNext = pNode->m_pNext->m_pNext;
+
+//         delete tmp;
+
+//     }
+// }
 
 //如果需要改变pHead的值(如只有一个结点，删除头结点,则pHead 将为null),　必须传递二级指针
 //有多个结点，删除头结点，如Test2(),并没有改变pHead值，只是删除了头结点的下一个值
