@@ -4,40 +4,75 @@ using namespace std;
 
 
 
-// 判断
-bool CheckAfterFindBRootInA(BinaryTreeNode* p1, BinaryTreeNode* p2)
+bool IsSameTree(BinaryTreeNode* A, BinaryTreeNode* B)
 {
-    if(p2 == nullptr && p1== nullptr) return true; // 两个都是 nullptr
-    if(p1 == nullptr && p2 != nullptr) return false;
-    if(p1 != nullptr && p2 == nullptr) return true; //p2这时候已经到低了
-    if(p2->m_nValue != p1->m_nValue)
-	return false;
-    
-    return CheckAfterFindBRootInA(p1->m_pLeft, p2->m_pLeft)&&CheckAfterFindBRootInA(p1->m_pRight, p2->m_pRight);
+    if(A== nullptr && B==nullptr) return true;
+    if(A== nullptr && B!= nullptr) return false;
+    if(A!= nullptr && B== nullptr) return true;
 
+    if(A->m_nValue == B->m_nValue)
+    {
+	return IsSameTree(A->m_pRight, B->m_pRight) && IsSameTree(A->m_pLeft, B->m_pLeft);
+    }
 }
 
 
-// 遍历A, 找到和B相同的子节点，再调用上面函数进行判断
+
 bool ATreeHasBTree(BinaryTreeNode* A, BinaryTreeNode* B)
 {
-    if(A == nullptr || B ==nullptr) return false;
-    int root = B->m_nValue;
-    bool result = false;
+    if(A == nullptr || B== nullptr) return false;
 
-    if(A->m_nValue == root)
+    if(A->m_nValue == B->m_nValue)
     {
-	result =  CheckAfterFindBRootInA(A, B);
+	return IsSameTree(A, B);
     }
     else
     {
-	result = ATreeHasBTree(A->m_pLeft, B);
-	if(result == false) // 左边子树也没有，那只剩下右边的了,这句很重要，千万不能丢，否则如果下面一句result错误，则覆盖上面正确结果
-	result = ATreeHasBTree(A->m_pRight, B);
+	return ATreeHasBTree(A->m_pRight, B) || ATreeHasBTree(A->m_pLeft, B);
     }
 
-    return result;
 }
+
+
+
+
+
+
+
+// 判断
+// bool CheckAfterFindBRootInA(BinaryTreeNode* p1, BinaryTreeNode* p2)
+// {
+//     if(p2 == nullptr && p1== nullptr) return true; // 两个都是 nullptr
+//     if(p1 == nullptr && p2 != nullptr) return false;
+//     if(p1 != nullptr && p2 == nullptr) return true; //p2这时候已经到低了
+//     if(p2->m_nValue != p1->m_nValue)
+//         return false;
+
+//     return CheckAfterFindBRootInA(p1->m_pLeft, p2->m_pLeft)&&CheckAfterFindBRootInA(p1->m_pRight, p2->m_pRight);
+
+// }
+
+
+// 遍历A, 找到和B相同的子节点，再调用上面函数进行判断
+// bool ATreeHasBTree(BinaryTreeNode* A, BinaryTreeNode* B)
+// {
+//     if(A == nullptr || B ==nullptr) return false;
+//     int root = B->m_nValue;
+//     bool result = false;
+
+//     if(A->m_nValue == root)
+//     {
+//         result =  CheckAfterFindBRootInA(A, B);
+//     }
+//     else
+//     {
+//         result = ATreeHasBTree(A->m_pLeft, B);
+//         if(result == false) // 左边子树也没有，那只剩下右边的了,这句很重要，千万不能丢，否则如果下面一句result错误，则覆盖上面正确结果
+//         result = ATreeHasBTree(A->m_pRight, B);
+//     }
+
+//     return result;
+// }
 
 
 
