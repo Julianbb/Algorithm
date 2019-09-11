@@ -13,71 +13,101 @@
 #include <iostream>
 using namespace std;
 
-
-
-int GetNumOfNodesInLoop(ListNode* pHead)
+ListNode* EntryNodeOfLoop(ListNode* pHead)
 {
-    if(pHead == nullptr)
-	return 0;
+    if(pHead == nullptr) return nullptr;
+    if(pHead->m_pNext == nullptr) return nullptr;
 
     ListNode* p1 = pHead;
     ListNode* p2 = pHead;
 
+    p1 = p1->m_pNext;
+    p2 = p2->m_pNext;
+    p2 = p2->m_pNext;
 
-    while(p2 != nullptr && p2->m_pNext != nullptr)
+    while(p1 != p2) // p1每次前进一个， p2每次前进2个，得到第一个相会点
     {
+	if(p1->m_pNext == nullptr || p2->m_pNext == nullptr || p1 == nullptr || p2 == nullptr) return nullptr;
+
 	p1 = p1->m_pNext;
-	p2 = p2->m_pNext->m_pNext;
-
-	if(p1 == p2)
-	    break;
-    }
-
-    if(p2->m_pNext == nullptr || p2 == nullptr)
-	return 0;
-
-    int number = 1;
-    if(p1 == p2)
-    {
 	p2 = p2->m_pNext;
-	while(p1 != p2)
-	{
-	    number++;
-	    p2 = p2->m_pNext;
-	}
-    }
-    return number;
-}
-
-
-
-ListNode* EntryNodeOfLoop(ListNode* pHead) 
-{
-    if(pHead == nullptr)
-	return nullptr;
-
-    int num = GetNumOfNodesInLoop(pHead);
-    if(num == 0) return nullptr;
-    
-    ListNode* p1 = pHead;
-    ListNode* p2 = pHead;
-
-    for(int i=0; i<num; i++) // 先将２号指针往后移num，再同时移动1,2，再相见便是loop入口
-    {
 	p2 = p2->m_pNext;
     }
 
+    p2 = pHead; // p1 不变， p2= head, 两者每次都走一步，相遇便是入口
     while(p1 != p2)
     {
 	p1 = p1->m_pNext;
 	p2 = p2->m_pNext;
     }
 
-    if(p1 == p2)
-    {
-	return p1;
-    }
+    return p1;
+
 }
+
+// int GetNumOfNodesInLoop(ListNode* pHead)
+// {
+//     if(pHead == nullptr)
+//         return 0;
+
+//     ListNode* p1 = pHead;
+//     ListNode* p2 = pHead;
+
+
+//     while(p2 != nullptr && p2->m_pNext != nullptr)
+//     {
+//         p1 = p1->m_pNext;
+//         p2 = p2->m_pNext->m_pNext;
+
+//         if(p1 == p2)
+//             break;
+//     }
+
+//     if(p2->m_pNext == nullptr || p2 == nullptr)
+//         return 0;
+
+//     int number = 1;
+//     if(p1 == p2)
+//     {
+//         p2 = p2->m_pNext;
+//         while(p1 != p2)
+//         {
+//             number++;
+//             p2 = p2->m_pNext;
+//         }
+//     }
+//     return number;
+// }
+
+
+
+// ListNode* EntryNodeOfLoop(ListNode* pHead)
+// {
+//     if(pHead == nullptr)
+//         return nullptr;
+
+//     int num = GetNumOfNodesInLoop(pHead);
+//     if(num == 0) return nullptr;
+
+//     ListNode* p1 = pHead;
+//     ListNode* p2 = pHead;
+
+//     for(int i=0; i<num; i++) // 先将２号指针往后移num，再同时移动1,2，再相见便是loop入口
+//     {
+//         p2 = p2->m_pNext;
+//     }
+
+//     while(p1 != p2)
+//     {
+//         p1 = p1->m_pNext;
+//         p2 = p2->m_pNext;
+//     }
+
+//     if(p1 == p2)
+//     {
+//         return p1;
+//     }
+// }
 
 
 
