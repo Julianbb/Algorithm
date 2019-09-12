@@ -1,79 +1,124 @@
 #include <iostream>
 using namespace std;
 
+// 递归解法
+void PrintArray_Clockwise(int* array, int rows, int cols)
+{
+    if(array == nullptr) return;
+    if(rows <=0 || cols <=0) return;
+
+    int x=0, y=0;
+
+    while(x>=0 && x<cols && y>=0 && y<rows)
+    {
+	cout << *(array+y*100+x) << " ";
+	x++;
+    }
+    x--; // x已经超了一个，需要再减一
+    y++;
+    if(y==rows) return; // 一行的情况
+    while(x>=0 && x<cols && y>=0 && y<rows)
+    {
+	cout << *(array+y*100+x) << " ";
+	y++;
+    }
+    y--;
+    x--;
+    if(x<0) return;
+    while(x>=0 && x<cols && y>=0 && y<rows)
+    {
+	cout << *(array+y*100+x) << " ";
+	x--;
+    }
+    x++;
+    y--;
+    while(x>=0 && x<cols && y>=0 && y<rows)
+    {
+	if(y == 0)
+	    break;
+	cout << *(array+y*100+x) << " ";
+	y--;
+    }
+    
+
+    array = array+101;
+    cols -= 2; 
+    rows -= 2; 
+    PrintArray_Clockwise(array, rows, cols);
+}
 
 
 //传递的数组是[100][100] ,flag是原点的标志位，0代表(0,0), 1:(1,1), 2:(2,2)
-void PrintArray_Clockwise(int* array, int rows, int cols, int flag=0)
-{
-    if(array == nullptr || rows <= 0 || cols <=0 )
-	return;
+// void PrintArray_Clockwise(int* array, int rows, int cols, int flag=0)
+// {
+//     if(array == nullptr || rows <= 0 || cols <=0 )
+//         return;
 
-    int flag_ud = 0; // 左右移动的标志位，1:向左，0:代表不动，-1:代表向右
-    int flag_lr = 1; // 上下移动的标志位, 1:向下，0:代表不动，-1:代表向上
+//     int flag_ud = 0; // 左右移动的标志位，1:向左，0:代表不动，-1:代表向右
+//     int flag_lr = 1; // 上下移动的标志位, 1:向下，0:代表不动，-1:代表向上
 
-    int i =0; //数组索引,行
-    int j =0;
+//     int i =0; //数组索引,行
+//     int j =0;
 
-    int tmp = array[(i+flag)*100+(j+flag)];//第一个元素
-    cout << tmp << " ";
-    
-    while(1)
-    {
-	if(flag_lr == 1) //向右
-	{
-	    j++;
-	    if(j==cols)
-	    {
-		if(rows == 1) //防止只有一行情况
-		    break;
-		j--;
-		flag_lr = 0;
-		flag_ud = 1;
-	    }
-	}
-	if(flag_ud == 1) //向下
-	{
-	    i++;
-	    if(i == rows)
-	    {
-		if(cols == 1)//防止一列的情况
-		    break;
-		i--;
-		flag_ud = 0;
-		flag_lr = -1;
-	    }
-	}
-	if(flag_lr == -1) //向左 
-	{
-	    j--;
-	    if(j == -1)
-	    {
-		j++;
-		flag_lr = 0;
-		flag_ud = -1;
-	    }
-	}
-	if(flag_ud == -1) //向上
-	{
-	    i--;
-	    if(i == -1)
-	    {
-		i++;
-		flag_ud = 0;
-		flag_lr = 1;
-	    }
-	}
+//     int tmp = array[(i+flag)*100+(j+flag)];//第一个元素
+//     cout << tmp << " ";
 
-	if(i==0 && j==0) //回到原点
-	    break;
-	else
-	cout << array[(i+flag)*100+(j+flag)] << " ";
-    }
-    
-       flag++; //原点往右下角移动１
-       PrintArray_Clockwise(array, rows-2, cols-2, flag); //递归调用
-}
+//     while(1)
+//     {
+//         if(flag_lr == 1) //向右
+//         {
+//             j++;
+//             if(j==cols)
+//             {
+//                 if(rows == 1) //防止只有一行情况
+//                     break;
+//                 j--;
+//                 flag_lr = 0;
+//                 flag_ud = 1;
+//             }
+//         }
+//         if(flag_ud == 1) //向下
+//         {
+//             i++;
+//             if(i == rows)
+//             {
+//                 if(cols == 1)//防止一列的情况
+//                     break;
+//                 i--;
+//                 flag_ud = 0;
+//                 flag_lr = -1;
+//             }
+//         }
+//         if(flag_lr == -1) //向左
+//         {
+//             j--;
+//             if(j == -1)
+//             {
+//                 j++;
+//                 flag_lr = 0;
+//                 flag_ud = -1;
+//             }
+//         }
+//         if(flag_ud == -1) //向上
+//         {
+//             i--;
+//             if(i == -1)
+//             {
+//                 i++;
+//                 flag_ud = 0;
+//                 flag_lr = 1;
+//             }
+//         }
+
+//         if(i==0 && j==0) //回到原点
+//             break;
+//         else
+//         cout << array[(i+flag)*100+(j+flag)] << " ";
+//     }
+
+//        flag++; //原点往右下角移动１
+//        PrintArray_Clockwise(array, rows-2, cols-2, flag); //递归调用
+// }
 
 
 
