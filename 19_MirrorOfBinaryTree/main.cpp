@@ -3,53 +3,97 @@
 using namespace std;
 #include "../Utilities/BinaryTree.h"
 
-typedef int (*FUN)(BinaryTreeNode*);
+typedef int(*FUN)(BinaryTreeNode*);
 
 
-
-
-//二叉树的循环
-int MirrorBinaryTree_Loop(BinaryTreeNode* root)
-{
-    if(root == nullptr) return -1;
-    if(root->m_pLeft == nullptr && root->m_pRight == nullptr) return -1;
-
-    stack<BinaryTreeNode*> stackBinaryTree;
-    stackBinaryTree.push(root);
-
-    while(stackBinaryTree.size()>0)
-    {
-	BinaryTreeNode* pNode = stackBinaryTree.top();
-	stackBinaryTree.pop();
-
-	BinaryTreeNode* tmp = pNode->m_pLeft;
-	pNode->m_pLeft = pNode->m_pRight;
-	pNode->m_pRight = tmp;
-
-	if(pNode->m_pLeft)
-	    stackBinaryTree.push(pNode->m_pLeft);
-	if(pNode->m_pRight)
-	    stackBinaryTree.push(pNode->m_pRight);
-    }
-}
-
-
-
-//二叉树的递归遍历
 int MirrorBinaryTree_Recurse(BinaryTreeNode* root)
 {
     if(root == nullptr) return -1;
-    if(root->m_pLeft == nullptr && root->m_pRight == nullptr) return -1;
 
-    BinaryTreeNode* tmp = root->m_pLeft;
-    root->m_pLeft = root->m_pRight;
-    root->m_pRight = tmp;
-
+    BinaryTreeNode* tmp = root->m_pRight;
+    root->m_pRight = root->m_pLeft;
+    root->m_pLeft = tmp;
 
     MirrorBinaryTree_Recurse(root->m_pLeft);
     MirrorBinaryTree_Recurse(root->m_pRight);
 
+    return 1;
 }
+
+
+int MirrorBinaryTree_Loop(BinaryTreeNode* root)
+{
+    if(root == nullptr) return -1;
+    stack<BinaryTreeNode*> TreeStack;
+
+    
+    TreeStack.push(root);
+
+
+    while(TreeStack.size() > 0)
+    {
+	
+	BinaryTreeNode* node = TreeStack.top();
+	TreeStack.pop();
+
+
+	BinaryTreeNode* tmp = node->m_pRight;
+	node->m_pRight = node->m_pLeft;
+	node->m_pLeft = tmp;
+
+
+	if(node->m_pRight)
+	    TreeStack.push(node->m_pRight);
+	if(node->m_pLeft)
+	    TreeStack.push(node->m_pLeft);
+
+    }
+    return 1;
+
+}
+
+//二叉树的循环
+// int MirrorBinaryTree_Loop(BinaryTreeNode* root)
+// {
+//     if(root == nullptr) return -1;
+//     if(root->m_pLeft == nullptr && root->m_pRight == nullptr) return -1;
+
+//     stack<BinaryTreeNode*> stackBinaryTree;
+//     stackBinaryTree.push(root);
+
+//     while(stackBinaryTree.size()>0)
+//     {
+//         BinaryTreeNode* pNode = stackBinaryTree.top();
+//         stackBinaryTree.pop();
+
+//         BinaryTreeNode* tmp = pNode->m_pLeft;
+//         pNode->m_pLeft = pNode->m_pRight;
+//         pNode->m_pRight = tmp;
+
+//         if(pNode->m_pLeft)
+//             stackBinaryTree.push(pNode->m_pLeft);
+//         if(pNode->m_pRight)
+//             stackBinaryTree.push(pNode->m_pRight);
+//     }
+// }
+
+
+
+//二叉树的递归遍历
+// int MirrorBinaryTree_Recurse(BinaryTreeNode* root)
+// {
+//     if(root == nullptr) return -1;
+//     if(root->m_pLeft == nullptr && root->m_pRight == nullptr) return -1;
+
+//     BinaryTreeNode* tmp = root->m_pLeft;
+//     root->m_pLeft = root->m_pRight;
+//     root->m_pRight = tmp;
+
+
+//     MirrorBinaryTree_Recurse(root->m_pLeft);
+//     MirrorBinaryTree_Recurse(root->m_pRight);
+
+// }
 
 
 
