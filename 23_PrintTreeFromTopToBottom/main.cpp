@@ -1,31 +1,62 @@
 #include <iostream>
 #include "../Utilities/BinaryTree.h"
+#include <string.h>
 #include <queue>
 using namespace std;
 
 
 int* PrintTree_TopToBottom(BinaryTreeNode* root)
 {
-    if(root == nullptr) return nullptr;
+    if(root == nullptr )return nullptr;
+    
     int* result = new int[100];
+    memset(result, 0, 4*100);
     int index =0;
-    queue<BinaryTreeNode*> queue_tree;
-    queue_tree.push(root);
-    while(!queue_tree.empty())
-    {
-	BinaryTreeNode* root_tmp = queue_tree.front();
-	result[index++] = root_tmp->m_nValue;
-	BinaryTreeNode* left = root_tmp->m_pLeft;
-        BinaryTreeNode* right = root_tmp->m_pRight;
-	queue_tree.pop();
 
-	if(left != nullptr)
-	    queue_tree.push(left);
-	if(right != nullptr)
-	    queue_tree.push(right);	    
+    queue<BinaryTreeNode*> array;
+    array.push(root);
+
+    while(array.size() > 0)
+    {
+	BinaryTreeNode* tmp = array.front();
+	array.pop();
+
+	if(tmp != nullptr)
+	    result[index++] = tmp->m_nValue;
+	else
+	    continue;
+
+
+	array.push(tmp->m_pLeft);
+	array.push(tmp->m_pRight);
     }
+
     return result;
+
 }
+
+// int* PrintTree_TopToBottom(BinaryTreeNode* root)
+// {
+//     if(root == nullptr) return nullptr;
+//     int* result = new int[100];
+//     int index =0;
+//     queue<BinaryTreeNode*> queue_tree;
+//     queue_tree.push(root);
+//     while(!queue_tree.empty())
+//     {
+//         BinaryTreeNode* root_tmp = queue_tree.front();
+//         result[index++] = root_tmp->m_nValue;
+//         BinaryTreeNode* left = root_tmp->m_pLeft;
+//         BinaryTreeNode* right = root_tmp->m_pRight;
+//         queue_tree.pop();
+
+//         if(left != nullptr)
+//             queue_tree.push(left);
+//         if(right != nullptr)
+//             queue_tree.push(right);
+//     }
+//     return result;
+// }
 
 
 
