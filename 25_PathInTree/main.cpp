@@ -4,40 +4,106 @@ using namespace std;
 #include "../Utilities/BinaryTree.h"
 
 
-void FindPath(BinaryTreeNode* root, int sum, int now_sum, vector<int>& path_tmp, vector<vector<int>>& path)
+
+void DFS(BinaryTreeNode* root, int sum, int& cur, vector<vector<int>>& path, vector<int>& tmp_path)
 {
-    if(root == nullptr) return;
-    now_sum += root->m_nValue;
-    path_tmp.push_back(root->m_nValue);
 
-    bool isLeaf = root->m_pLeft == nullptr && root->m_pRight == nullptr;
-    if(now_sum == sum && isLeaf)
+    if(root->m_pLeft == nullptr && root->m_pRight == nullptr) //边界
     {
-	path.push_back(path_tmp);
+    cur += root->m_nValue;
+    tmp_path.push_back(root->m_nValue);
+	if(sum == cur)
+	{
+	    path.push_back(tmp_path);
+	}
+	return;
     }
 
-    if(root->m_pLeft != nullptr)
+    cur += root->m_nValue;
+    tmp_path.push_back(root->m_nValue);
+    
+    if(root->m_pLeft != nullptr) //遍历两种可能， 可能1
     {
-	FindPath(root->m_pLeft, sum, now_sum, path_tmp, path);
-    }
-    if(root->m_pRight != nullptr)
-    {
-	FindPath(root->m_pRight, sum, now_sum, path_tmp, path);
+    DFS(root->m_pLeft, sum, cur, path, tmp_path);
+    cur -= (root->m_pLeft->m_nValue);
+    tmp_path.pop_back();
     }
 
-    path_tmp.pop_back(); // 很重要，返回的时候需要将当前结点弹出
+    if(root->m_pRight != nullptr) ////遍历两种可能， 可能2
+    {
+    DFS(root->m_pRight, sum, cur, path, tmp_path);
+    cur -= (root->m_pRight->m_nValue);
+    tmp_path.pop_back();
+    }
 
+
+    return;
 }
+
 
 
 void  FindPath(BinaryTreeNode* root, int sum, vector<vector<int>>& path)
 {
     if(root == nullptr) return;
-    vector<int> path1;
-    int sum_tmp = 0;
 
-    FindPath(root, sum, sum_tmp, path1, path);
+    int tmp_cur = 0;
+    vector<int> tmp_path;
+    DFS(root, sum, tmp_cur, path, tmp_path);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// void FindPath(BinaryTreeNode* root, int sum, int now_sum, vector<int>& path_tmp, vector<vector<int>>& path)
+// {
+//     if(root == nullptr) return;
+//     now_sum += root->m_nValue;
+//     path_tmp.push_back(root->m_nValue);
+
+//     bool isLeaf = root->m_pLeft == nullptr && root->m_pRight == nullptr;
+//     if(now_sum == sum && isLeaf)
+//     {
+//         path.push_back(path_tmp);
+//     }
+
+//     if(root->m_pLeft != nullptr)
+//     {
+//         FindPath(root->m_pLeft, sum, now_sum, path_tmp, path);
+//     }
+//     if(root->m_pRight != nullptr)
+//     {
+//         FindPath(root->m_pRight, sum, now_sum, path_tmp, path);
+//     }
+
+//     path_tmp.pop_back(); // 很重要，返回的时候需要将当前结点弹出
+
+// }
+
+
+// void  FindPath(BinaryTreeNode* root, int sum, vector<vector<int>>& path)
+// {
+//     if(root == nullptr) return;
+//     vector<int> path1;
+//     int sum_tmp = 0;
+
+//     FindPath(root, sum, sum_tmp, path1, path);
+// }
 
 
 
