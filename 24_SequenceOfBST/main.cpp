@@ -2,41 +2,107 @@
 using namespace std;
 
 
-
-
 bool VerifySequenceOfBST(int sequence[], int length)
 {
-	if(sequence == nullptr || length<=0) return false;
-	if(length == 1) return true; // 如果只有一个，直接返回true
+    if(sequence == nullptr || length <= 0) return false;
+    if(length == 1) return true;
 
-	int tmp_root = sequence[length-1];
-	int index =0;
-	while(index<length-1) // 找到第一个 > tmp_root的 index
+    int root = sequence[length-1];
+
+    int Left = 0,  Right = 0;
+    for(int i=0; i<length-1; i++)
+    {
+	if(sequence[i] > root)
 	{
-		if(sequence[index]<tmp_root) 
-			index++;
-		else
-			break;
+	    Left = i-1;
+	    Right = i;
+	    break;
 	}
-	int tmp = index;
-	while(tmp<length-1) // 遍历index 之后的，如果符合要求，后面应该都>tmp_root
+    }
+
+    if(Right  == 0) //前面的数＜root,  也有可能第一个数>root
+    {
+	if(sequence[0] < root) // 前面所有数< root
 	{
-		if(sequence[tmp] < tmp_root) // 如果index之后还有< tmp_root，直接返回false
-			return false;
-		else 
-			tmp++;
+	    Left = length-2;
+	    return VerifySequenceOfBST(sequence, Left+1); // 前面都是左子树
 	}
+	else // 第一个数 > root
+	{
+	    for(int i=Right; i<length-1; i++) // 判断如果后面有< root 则报错
+	    {
+		if(sequence[i] < root)
+		{
+		    return false;
+		}
+	    }
 
-	bool result = true;
+	    return VerifySequenceOfBST(sequence+Right, length-Right-1); // 前面都是右子树
+	}
+    }
 
-	if(index!=0) // 很重要，if(index == 0),执行的时候直接返回false, 但是有可能符合要求的
-	result = VerifySequenceOfBST(sequence, index); // 递归处理前半部分
 
-	if(length-index-1 != 0)
-	result = VerifySequenceOfBST(sequence+index, length-index-1); //递归处理后半部分
+    for(int i=Right; i<length-1; i++) // 分界点在中间，则判断后面的点都 > root
+    {
+	if(sequence[i] < root)
+	{
+	    return false;
+	}
+    }
 
-	return result;
+    return VerifySequenceOfBST(sequence, Left+1) && VerifySequenceOfBST(sequence+Right, length-Right-1);
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// bool verifysequenceofbst(int sequence[], int length)
+// {
+//         if(sequence == nullptr || length<=0) return false;
+//         if(length == 1) return true; // 如果只有一个，直接返回true
+
+//         int tmp_root = sequence[length-1];
+//         int index =0;
+//         while(index<length-1) // 找到第一个 > tmp_root的 index
+//         {
+//                 if(sequence[index]<tmp_root)
+//                         index++;
+//                 else
+//                         break;
+//         }
+//         int tmp = index;
+//         while(tmp<length-1) // 遍历index 之后的，如果符合要求，后面应该都>tmp_root
+//         {
+//                 if(sequence[tmp] < tmp_root) // 如果index之后还有< tmp_root，直接返回false
+//                         return false;
+//                 else
+//                         tmp++;
+//         }
+
+//         bool result = true;
+
+//         if(index!=0) // 很重要，if(index == 0),执行的时候直接返回false, 但是有可能符合要求的
+//         result = VerifySequenceOfBST(sequence, index); // 递归处理前半部分
+
+//         if(length-index-1 != 0)
+//         result = VerifySequenceOfBST(sequence+index, length-index-1); //递归处理后半部分
+
+//         return result;
+// }
 
 
 
