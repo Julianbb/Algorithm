@@ -1,40 +1,76 @@
 #include <iostream>
+#include <vector>
 #include "../Utilities/BinaryTree.h"
 using namespace std;
 
-
-void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
+void Vector_Tree(BinaryTreeNode* root, vector<BinaryTreeNode*>& array)
 {
-    if(pNode == nullptr)return;
+    if(root == nullptr) return;
+    
+    if(root->m_pLeft != nullptr) 
+	Vector_Tree(root->m_pLeft, array);
 
-    BinaryTreeNode* pCurrent = pNode;
-    if(pCurrent->m_pLeft != nullptr)
-	ConvertNode(pCurrent->m_pLeft, pLastNodeInList);
+    array.push_back(root);
 
-    pCurrent->m_pLeft = *pLastNodeInList;
-    if(*pLastNodeInList != nullptr)
-	(*pLastNodeInList)->m_pRight = pCurrent;
 
-    *pLastNodeInList = pCurrent;
+    if(root->m_pRight != nullptr)
+	Vector_Tree(root->m_pRight, array);
 
-    if(pCurrent->m_pRight != nullptr)
-	ConvertNode(pCurrent->m_pRight, pLastNodeInList);
 }
+
+
 
 
 BinaryTreeNode* Convert(BinaryTreeNode* pRootOfTree)
 {
-    if(pRootOfTree == nullptr) return nullptr;
-    BinaryTreeNode* pLastNodeInList = nullptr;
-    ConvertNode(pRootOfTree, &pLastNodeInList);
-     
-    //此时，pLastNodeInList已经指向list的尾部
-    BinaryTreeNode* pHeadOfList = pLastNodeInList;
-    while(pHeadOfList != nullptr && pHeadOfList->m_pLeft != nullptr)
-	pHeadOfList = pHeadOfList->m_pLeft;
+    if(pRootOfTree == nullptr)return nullptr;
+    vector<BinaryTreeNode*> array;
+    Vector_Tree(pRootOfTree, array);
 
-    return pHeadOfList;
+    for(int i=0; i<array.size()-1; i++)
+    {
+	array[i]->m_pRight = array[i+1];
+	array[i+1]->m_pLeft = array[i];
+    }
+
+    return array[0];
 }
+
+
+
+
+// void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
+// {
+//     if(pNode == nullptr)return;
+
+//     BinaryTreeNode* pCurrent = pNode;
+//     if(pCurrent->m_pLeft != nullptr)
+//         ConvertNode(pCurrent->m_pLeft, pLastNodeInList);
+
+//     pCurrent->m_pLeft = *pLastNodeInList;
+//     if(*pLastNodeInList != nullptr)
+//         (*pLastNodeInList)->m_pRight = pCurrent;
+
+//     *pLastNodeInList = pCurrent;
+
+//     if(pCurrent->m_pRight != nullptr)
+//         ConvertNode(pCurrent->m_pRight, pLastNodeInList);
+// }
+
+
+// BinaryTreeNode* Convert(BinaryTreeNode* pRootOfTree)
+// {
+//     if(pRootOfTree == nullptr) return nullptr;
+//     BinaryTreeNode* pLastNodeInList = nullptr;
+//     ConvertNode(pRootOfTree, &pLastNodeInList);
+
+//     //此时，pLastNodeInList已经指向list的尾部
+//     BinaryTreeNode* pHeadOfList = pLastNodeInList;
+//     while(pHeadOfList != nullptr && pHeadOfList->m_pLeft != nullptr)
+//         pHeadOfList = pHeadOfList->m_pLeft;
+
+//     return pHeadOfList;
+// }
 
 
 
