@@ -22,26 +22,26 @@ void Swap(int* a, int* b)
 
 
 // 方法1
-int Partition(int array[], int length, int start, int end)
+int Partition(int array[], int start, int end)
 {
-    if(array == nullptr || length <= 0 || start >= end) return -1;
+    if(array == nullptr ||  start > end) return -1; // 不要包含start=end 
 
-    int i=start+1, j=end;
+    int i=start, j=end; //不要写成 i=start+1
     while(i<j)
     {
-	while(array[j] > array[start] && j>i) ////因为从小到大排序，所以 j碰到相等的停下
+	while(array[j] >= array[start] && j>i) //
 	    j--;
 
-	while(array[i] <= array[start] && i<j) //因为从小到大排序，所以 i碰到相等的继续走
+	while(array[i] <= array[start] && i<j) //
 	    i++;
-
-	if(i<j)
-	    Swap(&array[i], &array[j]);
+    
+	 if(i<j)
+	     Swap(&array[i], &array[j]);
     }
 
     if(array[start]> array[j])
 	Swap(&array[j], &array[start]);
-
+    
     return i;
 }
 
@@ -79,7 +79,7 @@ void QuickSort(int array[], int length)
 
     if(length == 1) return;
 
-    int index = Partition(array, length, 0, length-1);
+    int index = Partition(array, 0, length-1);
     
     QuickSort(array, index);
     QuickSort(array+index+1, length-index-1);

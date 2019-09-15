@@ -5,25 +5,30 @@ typedef int(FUN)(int*, int);
 
 
 void swap(int* a, int* b);
-int Partition(int* array, int start, int end);
+int Partition(int array[], int start, int end);
 
-// 求数组里面出现次数最多的数，也适用于此题目，只不过测试代码中还需要对结果进行判断:是否是超过一半的数
+//求数组里面出现次数最多的数，也适用于此题目，只不过测试代码中还需要对结果进行判断:是否是超过一半的数
 int MoreThanHalfNum_Solution_1(int* array, int length)
 {
     if(array == nullptr || length == 0) return 0;
 
-    int number = 0, times = 0;
+    int number = array[0]; 
+    int times = 1;
 
-    for(int i=0; i<length; i++)
+    for(int i=1; i<length; i++)
     {
-	if(number == array[i])
-	    times++;
-	else
-	{
-	    times--;
-	    if(times == 0)
-		number = array[i];
-	}	    
+        if(number == array[i])
+            times++;
+        else
+        {
+            times--;
+            if(times == 0)
+            {
+                number = array[i];
+                times++;
+            }
+                
+        }
     }
 
     return number;
@@ -34,7 +39,7 @@ int MoreThanHalfNum_Solution_1(int* array, int length)
 
 
 // 基于快排的分治法原理，寻找中位数
-int MoreThanHalfNum_Solution_2(int* array, int length)
+int MoreThanHalfNum_Solution_2(int array[], int length)
 {
     if(array == nullptr || length == 0) return 0;
 
@@ -72,31 +77,79 @@ void swap(int* num1, int* num2)
     *num2 = temp;
 }
 
-int Partition(int* array, int start, int end)
+int Partition(int array[], int start, int end)
 {
-    if(array == nullptr || start > end) return 0;
+
+    if(array == nullptr || start > end) return -1;
+
+    int i=start;
+    int j=end;
 
 
-    int head = start;
-    int start_p = start;
-    int end_p = end;
-
-
-    while(start_p < end_p)
+    while(i!=j)
     {
-	while(array[end_p] >= array[head] &&  end_p > start_p) // 如果head 设置为start, 则从end开始, =也很重要
-	    end_p--;
-	while(array[start_p] <= array[head] && start_p < end_p)
-	    start_p++;
 
-	if(start_p < end_p) //还没有相遇
-	swap(&array[start_p], &array[end_p]);
+	while(array[j]>=array[start] && j>i)
+	    j--;
+	while(array[i]<=array[start] && j>i)
+	    i++;
+
+	if(i<j)
+	    swap(&array[i], &array[j]);
     }
 
-    if(start_p == end_p) // 相遇了
-    swap(&array[head], &array[start_p]);
+    swap(&array[start], &array[i]);
 
-    return start_p;
+    return i;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    // if(array == nullptr || start > end) return 0;
+
+
+    // int head = start;
+    // int start_p = start;
+    // int end_p = end;
+
+
+    // while(start_p < end_p)
+    // {
+    //     while(array[end_p] >= array[head] &&  end_p > start_p) // 如果head 设置为start, 则从end开始, =也很重要
+    //         end_p--;
+    //     while(array[start_p] <= array[head] && start_p < end_p)
+    //         start_p++;
+
+    //     if(start_p < end_p) //还没有相遇
+    //     swap(&array[start_p], &array[end_p]);
+    // }
+
+    // if(start_p == end_p) // 相遇了
+    // swap(&array[head], &array[start_p]);
+
+    // return start_p;
 }
 
 
@@ -125,23 +178,24 @@ bool checkIsMoreThanHalf(int* array, int length, int number)
 
 
 
-void Test(const char* test_name, int* numbers, int length, int expectedValue, FUN* function)
+void Test(const char* test_name, int numbers[], int length, int expectedValue, FUN* function)
 {
     if(test_name == nullptr) return;
     cout << "test_name " << test_name << ": ";
 
     int result = function(numbers, length);
-    if(result == expectedValue)
-	cout << "passed" << endl;
-    else
+
+    if(checkIsMoreThanHalf(numbers, length, result))
     {
-	if(!checkIsMoreThanHalf(numbers, length, result))
-	{
-	    cout << "passed" << endl;
-	}
-	else
-	cout << "failed" << endl;
-    }
+        if(result == expectedValue)
+            cout << "passed" << endl;
+
+        else
+            cout << "failed" << endl;
+    }    
+    else // 检查出来
+        cout << "passed" << endl;
+    
 }
 
 
