@@ -3,43 +3,71 @@ using namespace std;
 
 bool flag_valid = true;
 
-
-
 int MaxSumOfSubArray(int* array, int length)
 {
     if(array == nullptr || length <= 0) 
     {
 	flag_valid = false;
 	return 0;
-    }	
+    }
 
+    int max = array[0];
+    int sum = array[0];
 
-    int sum_now = 0;
-    int sum_pre = 0;  
-    int i = 0;
-
-    while(i < length)
+    for(int i=1; i<length; i++)
     {
-	
-	sum_now += array[i];	
-	if(i == 0)
+	sum += array[i];
+
+	if(sum <= max && sum < 0) // 不仅sum <= max , 还得sum < 0 
 	{
-	    sum_pre = sum_now;
-	    i++;
+	    sum = 0;
 	    continue;
 	}
 
-	if(sum_now > sum_pre) // 当前sum > 之前的最大值
-	{
-	    sum_pre = sum_now;
-	}
-	if(sum_now < sum_pre && sum_now < 0) //加了一个数之后，比之前最大小且当前总sum < 0
-	    sum_now = 0;
-	i++;
+	if(sum > max)
+	    max = sum;
+
     }
 
-    return sum_pre;
+    return max;
 }
+
+
+// int MaxSumOfSubArray(int* array, int length)
+// {
+//     if(array == nullptr || length <= 0)
+//     {
+//         flag_valid = false;
+//         return 0;
+//     }
+
+
+//     int sum_now = 0;
+//     int sum_pre = 0;
+//     int i = 0;
+
+//     while(i < length)
+//     {
+
+//         sum_now += array[i];
+//         if(i == 0)
+//         {
+//             sum_pre = sum_now;
+//             i++;
+//             continue;
+//         }
+
+//         if(sum_now > sum_pre) // 当前sum > 之前的最大值
+//         {
+//             sum_pre = sum_now;
+//         }
+//         if(sum_now < sum_pre && sum_now < 0) //加了一个数之后，比之前最大小且当前总sum < 0
+//             sum_now = 0;
+//         i++;
+//     }
+
+//     return sum_pre;
+// }
 
 
 
