@@ -10,93 +10,185 @@ void Swap(int* a, int* b)
     *b = tmp;
 }
 
-
-int Partion(int* array, int start, int end)
+int Partition(int array[], int start, int end)
 {
-    if(array == nullptr || start > end) return 0;
+    if(array == nullptr || start < 0 || end < 0 || start>end) return -1;
 
-    int start_p = start;
-    int end_p = end;
-    int head = start;
+    int i = start;
+    int j = end;
 
-    while(start_p < end_p)
+    while(i<j)
     {
-	while(start_p < end_p && array[end_p] >= array[head])
-	    end_p--;
+	while(array[j]>=array[start] && i<j)
+	    j--;
+	while(array[i]<=array[start] && i<j)
+	    i++;
 
-	while(start_p < end_p && array[start_p] <= array[head])	
-	    start_p++;
-
-	if(start_p < end_p)
-	    Swap(&array[start_p], &array[end_p]);
+	if(i<j)
+	    Swap(&array[i], &array[j]);
     }
 
-    Swap(&array[head], &array[start_p]);
-    return start_p;
+    Swap(&array[i], &array[start]);
+
+    return i;
 }
+
 
 void GetKLeastNumbers1(int* input, int length, int k)
 {
     if(input == nullptr || length <=0 || k<=0) return;
-    if(k>length)
-    {
-	return;
-    }
+    if(k >= length) return;
+    
 
-    int K = k-1;
     int start = 0;
     int end = length-1;
+    int index = Partition(input, start, end);
 
-    int tmp_index = Partion(input, start, end);
-    while(tmp_index != K)
+    while(index != k)
     {
-	if(tmp_index > K)
+	if(index < k)
 	{
-	    end = tmp_index-1;
-	    tmp_index = Partion(input, start, end); 
+	    start = index+1;
+	    index = Partition(input, start, end);
 	}
-	else
+	if(index > k)
 	{
-	    start = tmp_index+1;
-	    tmp_index = Partion(input, start, end);
+	    end = index-1;
+	    index = Partition(input, start, end);
 	}
     }
+    return;
+
 }
+
+
+
+
+
+// int Partion(int* array, int start, int end)
+// {
+//     if(array == nullptr || start > end) return 0;
+
+//     int start_p = start;
+//     int end_p = end;
+//     int head = start;
+
+//     while(start_p < end_p)
+//     {
+//         while(start_p < end_p && array[end_p] >= array[head])
+//             end_p--;
+
+//         while(start_p < end_p && array[start_p] <= array[head])
+//             start_p++;
+
+//         if(start_p < end_p)
+//             Swap(&array[start_p], &array[end_p]);
+//     }
+
+//     Swap(&array[head], &array[start_p]);
+//     return start_p;
+// }
+
+// void GetKLeastNumbers1(int* input, int length, int k)
+// {
+//     if(input == nullptr || length <=0 || k<=0) return;
+//     if(k>length)
+//     {
+//         return;
+//     }
+
+//     int K = k-1;
+//     int start = 0;
+//     int end = length-1;
+
+//     int tmp_index = Partion(input, start, end);
+//     while(tmp_index != K)
+//     {
+//         if(tmp_index > K)
+//         {
+//             end = tmp_index-1;
+//             tmp_index = Partion(input, start, end);
+//         }
+//         else
+//         {
+//             start = tmp_index+1;
+//             tmp_index = Partion(input, start, end);
+//         }
+//     }
+// }
 
 // 解法二：定义一个k大小的容器,初始化容器为数组前k个值，变量数组，与容器最大值比较，进行插入，删除等操作
 // 优点：没有改变数组的原始值
 
-typedef multiset<int, greater<int>>   intSet;
-typedef multiset<int, greater<int>>::iterator setIterator;
 
-void GetKLeastNumbers2(int* input, int length, int k, intSet& leastNumber)
+
+void GetKLeastNumbers2(int array[], int length, int k, multiset<int, greater<int>>& num)
 {
-    if(input == nullptr || length <=0) return;
-    if(k > length)
-    {
-	cout << "passed" << endl;
-	return;
-    }
+    if(array== nullptr || length<=0) return;
+    if(k > length) return;
 
-    //正式代码
-    for(int i=0; i<length; i++)
+    for(int i = 0; i<length; i++)
     {
-	if(leastNumber.size() < k)
-	{
-	    leastNumber.insert(input[i]);
-	}
-	else
-	{
-	    setIterator it = leastNumber.begin();
-	    if(input[i] < *(it))
-	    {
-		leastNumber.erase(it);
-		leastNumber.insert(input[i]);
-	    }
-	}
+        if(i<k)
+        {
+            num.insert(array[i]);
+        }
+        else
+        {
+            auto it = num.begin();
+            
+            if(array[i] < *it)
+            {
+                num.erase(*it);
+                num.insert(array[i]);
+            }
+        }
     }
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// typedef multiset<int, greater<int>>   intSet;
+ //typedef multiset<int, greater<int>>::iterator setIterator;
+
+// void GetKLeastNumbers2(int* input, int length, int k, intSet& leastNumber)
+// {
+//     if(input == nullptr || length <=0) return;
+//     if(k > length)
+//     {
+// 	cout << "passed" << endl;
+// 	return;
+//     }
+
+//     //正式代码
+//     for(int i=0; i<length; i++)
+//     {
+// 	if(leastNumber.size() < k)
+// 	{
+// 	    leastNumber.insert(input[i]);
+// 	}
+// 	else
+// 	{
+// 	    setIterator it = leastNumber.begin();
+// 	    if(input[i] < *(it))
+// 	    {
+// 		leastNumber.erase(it);
+// 		leastNumber.insert(input[i]);
+// 	    }
+// 	}
+//     }
+    
+// }
 
 //=================测试代码========================
 
@@ -130,25 +222,25 @@ void Test(const char* testName, int* array, int length, int* expectedValue, int 
 	return;
     }
 
-    GetKLeastNumbers1(array, length, k);
-    int i=0;
-    for(; i<k; i++)
-    {
-	if(!numberInArray(expectedValue, k, array[i]))
-	    break;
-    }
-    /* 解法二
-    intSet result;
-    setIterator it;
+    // GetKLeastNumbers1(array, length, k);
+    // int i=0;
+    // for(; i<k; i++)
+    // {
+	// if(!numberInArray(expectedValue, k, array[i]))
+	//     break;
+    // }
+     //解法二
+    multiset<int, greater<int>> result;
+
     int i=0;
 
     GetKLeastNumbers2(array, length, k, result);
-    for(it = result.begin(); it!=result.end(); it++, i++)
+    for(auto it = result.begin(); it!=result.end(); it++, i++)
     {
 	if(!numberInArray(expectedValue, k, *(it)))
 	    break;
     }
-    */
+    
 
     if(i==k)
 	cout << "passed" << endl;
