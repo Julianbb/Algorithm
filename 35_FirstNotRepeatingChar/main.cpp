@@ -2,26 +2,56 @@
 #include <string.h>
 using namespace std;
 
-
 char FirstNotRepeatingChar(const char* p)
 {
-    if(p == nullptr) return 0;
-    char array[256] = {0};
-    int length = strlen(p);
+    if(p == nullptr) return '\0';
+    char a[256] = {0};
 
-    for(int i=0; i<length; i++)
+    for(int i=0; i<strlen(p); i++)
     {
-	array[p[i]]++;
+	a[p[i]]++;
     }
 
-    
-    for(int i=0; i<length; i++)
+    for(int i=0; i<strlen(p); i++)
     {
-	if(array[p[i]] == 1)
-	    return p[i];
+	if(a[p[i]]==1)
+	return p[i];
     }
-    return 0;
+    return '\0';
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// char FirstNotRepeatingChar(const char* p)
+// {
+//     if(p == nullptr) return 0;
+//     char array[256] = {0};
+//     int length = strlen(p);
+
+//     for(int i=0; i<length; i++)
+//     {
+//         array[p[i]]++;
+//     }
+
+
+//     for(int i=0; i<length; i++)
+//     {
+//         if(array[p[i]] == 1)
+//             return p[i];
+//     }
+//     return 0;
+// }
 
 
 
