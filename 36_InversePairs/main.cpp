@@ -2,72 +2,130 @@
 #include <memory.h>
 using namespace std;
 
-
-// 申请的copy 数组需要初始化为和data一样的数据
-int InversePairsCore(int* data, int* copy, int start, int end)
+int InversePairesCore(int* data, int* copy, int start, int end)
 {
-    if(data == nullptr|| copy == nullptr || start > end) return 0;
     if(start == end)
     {
 	copy[start] = data[start];
 	return 0;
     }
-
     int length = (end-start)/2;
-    int left = InversePairsCore(copy, data, start, start+length); // copy 和data 颠倒, 因为copy 和data数据是一样的，所以每次交替当彼此辅助
-    int right = InversePairsCore(copy, data,  start+length+1, end);
+    int left = InversePairesCore(copy, data, start, start+length);
+    int right = InversePairesCore(copy, data, start+length+1, end);
 
-
-    int i = start + length;
+    int i = start+length;
     int j = end;
     int indexCopy = end;
     int count = 0;
 
-
-    while(i>=start && j>= start+length+1)
+    while(i >= start && j>= start+length+1)
     {
-	if(data[i] > data[j]) // 把大的数放到辅助数组里
+	if(data[i] > data[j])
 	{
 	    copy[indexCopy--] = data[i--];
-		count += j-start-length; // 如果前面的数>后面的数，则逆序对+ j到当前字数组的开始，因为前面数都比他小
+	    count += j-start-length; //右边 j左边的所有 
 	}
-	else // 把大的数放到辅助数组里，大的j--, 再比较
+	else
 	{
-	    copy[indexCopy--] = data[j--];
+	    copy[indexCopy--] = data[j--]; // 把右边放到辅助数组， j--
 	}
     }
 
-    // 把剩下的j 或者 i 全部复制到辅助数组里
-    for(; i>= start; --i)
-	copy[indexCopy--]  = data[i];
+    // 把剩下放到辅助数组
+    for(; i>=start; --i)
+    {
+	copy[indexCopy--] = data[i];
+    }
     for(; j>=start+length+1; --j)
+    {
 	copy[indexCopy--] = data[j];
+    }
 
     return left+right+count;
 }
 
-
-int InversePairs(int* dataArray, int length)
+int InversePairs(int* data, int length)
 {
-    if (dataArray == nullptr || length <= 0)
-	return 0;
-
-    int* copy = new int[length]; // 归并排序的辅助数组
-    for(int i=0; i<length; i++ )
-         copy[i] = dataArray[i]; // 需要初始化成和dataArray一样的数组
-
-    int count = InversePairsCore(dataArray, copy, 0, length-1);
-
-    //最后输出的排序是copy, 不在dataArray
-    // for(int i=0; i<length; i++)
-    // {
-    //     cout << copy[i];
-    // }
-    // cout << endl;
-    delete []copy;
+    if(data== nullptr || length<=0)return 0;
+    int* copy = new int[length];
+    for(int i=0; i<length; i++)
+    {
+	copy[i] = data[i];
+    }
+    int count = InversePairesCore(data, copy, 0, length-1);
+    delete[]copy;
 
     return count;
 }
+
+
+
+
+// 申请的copy 数组需要初始化为和data一样的数据
+// int InversePairsCore(int* data, int* copy, int start, int end)
+// {
+//     if(data == nullptr|| copy == nullptr || start > end) return 0;
+//     if(start == end)
+//     {
+//         copy[start] = data[start];
+//         return 0;
+//     }
+
+//     int length = (end-start)/2;
+//     int left = InversePairsCore(copy, data, start, start+length); // copy 和data 颠倒, 因为copy 和data数据是一样的，所以每次交替当彼此辅助
+//     int right = InversePairsCore(copy, data,  start+length+1, end);
+
+
+//     int i = start + length;
+//     int j = end;
+//     int indexCopy = end;
+//     int count = 0;
+
+
+//     while(i>=start && j>= start+length+1)
+//     {
+//         if(data[i] > data[j]) // 把大的数放到辅助数组里
+//         {
+//             copy[indexCopy--] = data[i--];
+//                 count += j-start-length; // 如果前面的数>后面的数，则逆序对+ j到当前字数组的开始，因为前面数都比他小
+//         }
+//         else // 把大的数放到辅助数组里，大的j--, 再比较
+//         {
+//             copy[indexCopy--] = data[j--];
+//         }
+//     }
+
+//     // 把剩下的j 或者 i 全部复制到辅助数组里
+//     for(; i>= start; --i)
+//         copy[indexCopy--]  = data[i];
+//     for(; j>=start+length+1; --j)
+//         copy[indexCopy--] = data[j];
+
+//     return left+right+count;
+// }
+
+
+// int InversePairs(int* dataArray, int length)
+// {
+//     if (dataArray == nullptr || length <= 0)
+//         return 0;
+
+//     int* copy = new int[length]; // 归并排序的辅助数组
+//     for(int i=0; i<length; i++ )
+//          copy[i] = dataArray[i]; // 需要初始化成和dataArray一样的数组
+
+//     int count = InversePairsCore(dataArray, copy, 0, length-1);
+
+//     //最后输出的排序是copy, 不在dataArray
+//     // for(int i=0; i<length; i++)
+//     // {
+//     //     cout << copy[i];
+//     // }
+//     // cout << endl;
+//     delete []copy;
+
+//     return count;
+// }
 
 
 
