@@ -5,6 +5,7 @@ using namespace std;
 
 
 
+
 int  TreeDepth( const BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr) return 0;
@@ -13,6 +14,7 @@ int  TreeDepth( const BinaryTreeNode* pRoot)
 
     return (left > right)? (left+1) : (right+1);
 }
+
 
 
 // ====================测试代码====================
