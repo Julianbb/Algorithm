@@ -1,75 +1,147 @@
 #include <iostream>
 using namespace std;
 
-
-
-int GetFirstOrLastK(int* data, int start, int end,  int k, int flag_first_last)
+int GetFirstK(int* data, int length, int k, int start, int end)
 {
-    if(data==nullptr || start>end )return -1;
+    if(data == nullptr || length<=0)return -1;
+    if(start>end) return -1;
 
-    int tmp_index = (end+start)/2;
-    int tmp_data = data[tmp_index];
+    int mid = (start+end)/2;
+    int midData = data[mid];
 
-    int next_start = start;
-    int next_end = end;
-    int length = start-end+1;
-
-
-    if(tmp_data==k) // ==k 的时候，你得判断它是不是第一个或者最后一个
+    if(midData == k)
     {
-	if(flag_first_last == 0)
-	{
-	    if(tmp_index !=start && data[tmp_index-1] == k)// tmp_index不是第一个，否则-1就越界了, 如果是第一个，直接返回它的index
-	    {
-		next_start = start;
-		next_end = tmp_index-1;
-		return GetFirstOrLastK(data, next_start, next_end, k, 0);
-	    }
-	    else
-		return tmp_index;
-
-	}
+	if((mid > 0 && data[mid-1] != k)|| mid == 0)
+	    return mid;
 	else
-	{
-	    if(tmp_index != end && data[tmp_index+1] == k) // tmp_index不是最后一个，否则+1就越界了
-	    {
-		next_start = tmp_index+1;
-		next_end = end;
-		return GetFirstOrLastK(data, next_start, next_end, k, 1);
-	    }
-	    else
-		return tmp_index;
-	}
+	    end = mid-1;
     }
-
-    if(tmp_data>k)
+    else if(midData > k)
     {
-	next_start = start;
-	next_end = tmp_index-1;
-	return GetFirstOrLastK(data, next_start, next_end, k, flag_first_last);
+	end = mid -1;
     }
-
-    if(tmp_data<k)
+    else
     {
-	next_start = tmp_index+1;
-	next_end = end;
-	return GetFirstOrLastK(data,next_start, next_end, k, flag_first_last);
+	start = mid+1;
     }
 
+    return GetFirstK(data, length, k, start, end);
+}
+
+
+
+int GetLastK(int* data, int length, int k, int start, int end)
+{
+    if(data == nullptr || length<=0)return -1;
+    if(start>end) return -1;
+
+    int mid = (start+end)/2;
+    int midData = data[mid];
+
+    if(midData == k)
+    {
+	if(mid == length-1 || (mid < length-1 && (data[mid+1]) != k))
+	    return mid;
+	else
+	    start = mid+1;
+    }
+    else if(midData > k)
+    {
+	end = mid -1;
+    }
+    else
+    {
+	start = mid+1;
+    }
+
+
+    return GetLastK(data, length, k, start, end);
 }
 
 
 
 int GetNumberOfK(int* data, int length, int k)
 {
-    if(data == nullptr || length<=0) return 0;
+    if(data == nullptr || length <=0) return 0;
+    int F = GetFirstK(data, length, k, 0, length-1);
+    int L = GetLastK(data, length, k, 0, length-1);
 
-    int first_index = GetFirstOrLastK(data, 0, length-1, k, 0);
-    int last_index = GetFirstOrLastK(data, 0, length-1, k, 1);
+    int num = 0;
 
-    if(first_index == -1 || last_index == -1) return 0;
-    return last_index-first_index+1;
+    if(F >= 0 && L >= 0)
+	num = L-F+1;
+
+    return num;
 }
+
+
+// int GetFirstOrLastK(int* data, int start, int end,  int k, int flag_first_last)
+// {
+//     if(data==nullptr || start>end )return -1;
+
+//     int tmp_index = (end+start)/2;
+//     int tmp_data = data[tmp_index];
+
+//     int next_start = start;
+//     int next_end = end;
+//     int length = start-end+1;
+
+
+//     if(tmp_data==k) // ==k 的时候，你得判断它是不是第一个或者最后一个
+//     {
+//         if(flag_first_last == 0)
+//         {
+//             if(tmp_index !=start && data[tmp_index-1] == k)// tmp_index不是第一个，否则-1就越界了, 如果是第一个，直接返回它的index
+//             {
+//                 next_start = start;
+//                 next_end = tmp_index-1;
+//                 return GetFirstOrLastK(data, next_start, next_end, k, 0);
+//             }
+//             else
+//                 return tmp_index;
+
+//         }
+//         else
+//         {
+//             if(tmp_index != end && data[tmp_index+1] == k) // tmp_index不是最后一个，否则+1就越界了
+//             {
+//                 next_start = tmp_index+1;
+//                 next_end = end;
+//                 return GetFirstOrLastK(data, next_start, next_end, k, 1);
+//             }
+//             else
+//                 return tmp_index;
+//         }
+//     }
+
+//     if(tmp_data>k)
+//     {
+//         next_start = start;
+//         next_end = tmp_index-1;
+//         return GetFirstOrLastK(data, next_start, next_end, k, flag_first_last);
+//     }
+
+//     if(tmp_data<k)
+//     {
+//         next_start = tmp_index+1;
+//         next_end = end;
+//         return GetFirstOrLastK(data,next_start, next_end, k, flag_first_last);
+//     }
+
+// }
+
+
+
+// int GetNumberOfK(int* data, int length, int k)
+// {
+//     if(data == nullptr || length<=0) return 0;
+
+//     int first_index = GetFirstOrLastK(data, 0, length-1, k, 0);
+//     int last_index = GetFirstOrLastK(data, 0, length-1, k, 1);
+
+//     if(first_index == -1 || last_index == -1) return 0;
+//     return last_index-first_index+1;
+// }
 
 
 
