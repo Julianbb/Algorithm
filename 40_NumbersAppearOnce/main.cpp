@@ -1,40 +1,82 @@
 #include <iostream>
 using namespace std;
 
-
 void FindNumsAppearOnce(int* data, int length, int* result1, int* result2)
 {
     if(data == nullptr || length < 2) return;
     
-    int result = 0;
-
+    int tmp = 0;
     for(int i=0; i<length; i++)
     {
-	result ^= data[i];
+	tmp ^= data[i];
     }
 
 
-    // 得到result 第一个不为0的位
-    int tmp_result = 0;
-    int n_bits = 0;
-    while(!tmp_result)
+    int flag = 1;
+    while( (flag & tmp) == 0)    
     {
-	int tmp_num = 1 << n_bits++; 
-	tmp_result = tmp_num & result;
+	    flag = flag << 1;
     }
-    n_bits -- ; // 从第0位开始
 
 
     for(int i=0; i<length; i++)
     {
-	int tmp_nbits = (data[i] >> n_bits)%2;
-	   if(tmp_nbits == 0)
-	      *result1 ^= data[i];
-	   else
-	      *result2 ^= data[i]; 
+	if((data[i] & flag) == 0)
+	{
+	    *result1 ^= data[i];
+	}
+	else
+	{
+    	    *result2 ^= data[i];
+	}
     }
-    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// void FindNumsAppearOnce(int* data, int length, int* result1, int* result2)
+// {
+//     if(data == nullptr || length < 2) return;
+
+//     int result = 0;
+
+//     for(int i=0; i<length; i++)
+//     {
+//         result ^= data[i];
+//     }
+
+
+//     // 得到result 第一个不为0的位
+//     int tmp_result = 0;
+//     int n_bits = 0;
+//     while(!tmp_result)
+//     {
+//         int tmp_num = 1 << n_bits++;
+//         tmp_result = tmp_num & result;
+//     }
+//     n_bits -- ; // 从第0位开始
+
+
+//     for(int i=0; i<length; i++)
+//     {
+//         int tmp_nbits = (data[i] >> n_bits)%2;
+//            if(tmp_nbits == 0)
+//               *result1 ^= data[i];
+//            else
+//               *result2 ^= data[i];
+//     }
+
+// }
 
 
 
