@@ -16,6 +16,63 @@
 using namespace std;
 
 
+void Print(BinaryTreeNode* pRoot)
+{
+    if(pRoot == nullptr) return;
+
+    int flag = 1;
+    BinaryTreeNode* node = pRoot;
+    stack<BinaryTreeNode*> array[2];
+    array[flag%2].push(node);
+
+    int cur = 1;
+    int next = 0;
+
+    while(array[0].size() > 0 || array[1].size() > 0)
+    {
+	
+	BinaryTreeNode* p = array[flag%2].top();
+	array[flag%2].pop();
+	cout << p->m_nValue << " " ;
+	cur--;
+
+	if(flag % 2 == 1)
+	{
+	    if(p->m_pLeft != nullptr) 
+	    {
+		array[(flag+1)%2].push(p->m_pLeft);
+		next++;
+	    }
+	    if(p->m_pRight != nullptr)
+	    {
+		array[(flag+1)%2].push(p->m_pRight);
+		next++;
+	    }
+	}
+	else
+	{
+	    if(p->m_pRight != nullptr)
+	    {
+		array[(flag+1)%2].push(p->m_pRight);
+		next++;
+	    }
+	    if(p->m_pLeft != nullptr) 
+	    {
+		array[(flag+1)%2].push(p->m_pLeft);
+		next++;
+	    }
+	}
+	
+	if(cur == 0)
+	{
+	    cur = next;
+	    next = 0;
+	    flag++;
+	    cout << endl;
+	}
+    }
+
+}
 
 
 // Myself
@@ -91,54 +148,54 @@ using namespace std;
 
 
 // thought from Offer
-void Print(BinaryTreeNode* pRoot)
-{
-    if(pRoot == nullptr)
-	return;
+// void Print(BinaryTreeNode* pRoot)
+// {
+//     if(pRoot == nullptr)
+//         return;
 
-    stack<BinaryTreeNode*> s[2];
+//     stack<BinaryTreeNode*> s[2];
 
-    int flag = 0;
-    int tmp = 0;
+//     int flag = 0;
+//     int tmp = 0;
 
-    cout << pRoot->m_nValue << endl;
-    if(pRoot->m_pLeft != nullptr) s[0].push(pRoot->m_pLeft);
-    if(pRoot->m_pRight != nullptr) s[0].push(pRoot->m_pRight);
+//     cout << pRoot->m_nValue << endl;
+//     if(pRoot->m_pLeft != nullptr) s[0].push(pRoot->m_pLeft);
+//     if(pRoot->m_pRight != nullptr) s[0].push(pRoot->m_pRight);
 
 
-    while(s[tmp].size()!=0)
-    {
-	int size = s[tmp].size();
-	for(int i=0; i<size; i++)
-	{
-	    BinaryTreeNode* node = s[tmp].top();
-	    s[tmp].pop();
-	    cout << node->m_nValue << " " ;
+//     while(s[tmp].size()!=0)
+//     {
+//         int size = s[tmp].size();
+//         for(int i=0; i<size; i++)
+//         {
+//             BinaryTreeNode* node = s[tmp].top();
+//             s[tmp].pop();
+//             cout << node->m_nValue << " " ;
 
-	    if(tmp == 0)
-	    {
-		if(node->m_pRight != nullptr)
-		s[tmp+1].push(node->m_pRight);
+//             if(tmp == 0)
+//             {
+//                 if(node->m_pRight != nullptr)
+//                 s[tmp+1].push(node->m_pRight);
 
-		if(node->m_pLeft != nullptr)
-		s[tmp+1].push(node->m_pLeft);
-	    }
-	    else
-	    {
-		if(node->m_pLeft != nullptr)
-		s[tmp-1].push(node->m_pLeft);
+//                 if(node->m_pLeft != nullptr)
+//                 s[tmp+1].push(node->m_pLeft);
+//             }
+//             else
+//             {
+//                 if(node->m_pLeft != nullptr)
+//                 s[tmp-1].push(node->m_pLeft);
 
-		if(node->m_pRight != nullptr)
-		s[tmp-1].push(node->m_pRight);
+//                 if(node->m_pRight != nullptr)
+//                 s[tmp-1].push(node->m_pRight);
 
-	    }	
-	}
-	flag++;
-	tmp = flag%2;
-	cout << endl;
-    }
+//             }
+//         }
+//         flag++;
+//         tmp = flag%2;
+//         cout << endl;
+//     }
 
-}
+// }
 
 
 //            8
