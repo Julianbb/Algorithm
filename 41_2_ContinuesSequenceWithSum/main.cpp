@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void Myprint(int index1, int index2)
+void MyPrint(int index1, int index2)
 {
     if(index1>=index2)return;
     for(int i=index1; i<=index2; i++)
@@ -13,38 +13,77 @@ void Myprint(int index1, int index2)
 
 void FindContinuousSequence(int sum)
 {
-    if(sum <= 1)return;
+    if(sum <=1 )return;
+    int p1=1;
+    int p2=2;
+    int tmp_sum=p1+p2;
 
-    int index1 = 1;
-    int index2 = 2;
-    int sum_tmp = 3;
 
-    while(index1<index2)
+    int index_flag = sum/2;
+    while(p1<p2 && p1<=index_flag && p2<sum)
     {
-	while(sum_tmp != sum)
+	if(tmp_sum == sum)
 	{
-	    if(sum_tmp < sum)
-	    {
-		index2++;
-		sum_tmp += index2;
-	    }
-	    if(sum_tmp > sum)
-	    {
-	       sum_tmp -= index1;
-	       index1++; 
-	    }
-	    if(index1==index2) 
-		break;
+	    MyPrint(p1, p2);
+
+	    p2++;
+	    tmp_sum += p2;
+	    continue;
 	}
-	if(sum_tmp == sum)
+	else if(tmp_sum < sum)
 	{
-	    Myprint(index1, index2);
-	    index2++;
-	    sum_tmp += index2;
+	    p2++;
+	    tmp_sum += p2;
+	}
+	else
+	{
+	    tmp_sum -= p1;
+	    p1++;
 	}
     }
 
+
 }
+
+
+
+
+
+
+// void FindContinuousSequence(int sum)
+// {
+//     if(sum <= 1)return;
+
+//     int index1 = 1;
+//     int index2 = 2;
+//     int sum_tmp = 3;
+
+//     while(index1<index2)
+//     {
+//         while(sum_tmp != sum)
+//         {
+//             if(sum_tmp < sum)
+//             {
+//                 index2++;
+//                 sum_tmp += index2;
+//             }
+//             if(sum_tmp > sum)
+//             {
+//                sum_tmp -= index1;
+//                index1++;
+//             }
+//             if(index1==index2)
+//                 break;
+//         }
+//         if(sum_tmp == sum)
+//         {
+//             Myprint(index1, index2);
+//             index2++;
+//             sum_tmp += index2;
+//         }
+//     }
+
+// }
 
 
 

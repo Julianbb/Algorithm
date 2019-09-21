@@ -1,39 +1,66 @@
 #include <iostream>
 using namespace std;
 
-
 bool FindNumbersWithSum(int* data, int length, int sum, int* num1, int* num2)
 {
-    if(data == nullptr || length <=1) return false;
-    if(num1 == nullptr || num2 == nullptr) return false;
-    bool found = false;
+    if(data == nullptr || length <2)return false;
 
+    int p1 = 0; 
+    int p2 = length-1;
 
-    int index1 = 0;
-    int index2 = length-1;
-
-    while(index1 != index2)
+    while(p1 < p2)
     {
-	if(data[index1] +data[index2] < sum)
+	if(data[p1]+data[p2] > sum)
 	{
-	    index1++;
+	    p2--;
 	}
-	else if(data[index1] + data[index2] > sum)
+	else if(data[p1]+data[p2] < sum)
 	{
-	    index2--;
+	    p1++;
 	}
 	else
 	{
-	    *num1 = data[index1];
-	    *num2 = data[index2];
-	    found = true; 
-	    break;
+	    *num1 = data[p1];
+	    *num2 = data[p2];
+	    return true;
 	}
     }
 
-
-    return found;
+    return false;
 }
+
+// bool FindNumbersWithSum(int* data, int length, int sum, int* num1, int* num2)
+// {
+//     if(data == nullptr || length <=1) return false;
+//     if(num1 == nullptr || num2 == nullptr) return false;
+//     bool found = false;
+
+
+//     int index1 = 0;
+//     int index2 = length-1;
+
+//     while(index1 != index2)
+//     {
+//         if(data[index1] +data[index2] < sum)
+//         {
+//             index1++;
+//         }
+//         else if(data[index1] + data[index2] > sum)
+//         {
+//             index2--;
+//         }
+//         else
+//         {
+//             *num1 = data[index1];
+//             *num2 = data[index2];
+//             found = true;
+//             break;
+//         }
+//     }
+
+
+//     return found;
+// }
 
 
 
