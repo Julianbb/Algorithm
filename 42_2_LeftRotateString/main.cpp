@@ -2,7 +2,6 @@
 #include <string.h>
 using namespace std;
 
-// 翻转从start 到 end之间的字符
 void Reverse(char* start, char* end)
 {
     if(start == nullptr || end == nullptr)return;
@@ -24,24 +23,75 @@ void Reverse(char* start, char* end)
 }
 
 
+
 char*  LeftRotateString(char* input, int num)
 {
-    if(input == nullptr) return nullptr;
-    if(num < 1) return input;
+    if(input == nullptr || num <= 0) return input;
 
-    char* index1 = input;
-    char* index2 = input;
-    while(*index2 != 0)
-	index2++;
+    int length = static_cast<int>(strlen(input));
+    if(length<=num)  return input;
 
-    if(num >= index2-index1) return input;
+    char* p1 = input;
+    char* p2 = input+length-1;
+    int mid = length-num;
 
-    Reverse(index1, index1+num-1); // 先翻转　start到start+num-1
-    Reverse(index1+num, --index2); // 再翻转  start+num 到结束
-    Reverse(index1, index2);  // 再翻转整个字符串
+    Reverse(p1, p2);
+
+    Reverse(p1, p1+mid-1);
+    Reverse(p1+mid, p2);
 
     return input;
 }
+
+
+
+
+
+
+
+
+
+
+// 翻转从start 到 end之间的字符
+// void Reverse(char* start, char* end)
+// {
+//     if(start == nullptr || end == nullptr)return;
+//     if(start>=end) return;
+
+//     char* index1 = start;
+//     char* index2 = end;
+
+//     while(index1 < index2)
+//     {
+//         char tmp;
+//         tmp = *index1;
+//         *index1 = *index2;
+//         *index2 = tmp;
+
+//         index1++;
+//         index2--;
+//     }
+// }
+
+
+// char*  LeftRotateString(char* input, int num)
+// {
+//     if(input == nullptr) return nullptr;
+//     if(num < 1) return input;
+
+//     char* index1 = input;
+//     char* index2 = input;
+//     while(*index2 != 0)
+//         index2++;
+
+//     if(num >= index2-index1) return input;
+
+//     Reverse(index1, index1+num-1); // 先翻转　start到start+num-1
+//     Reverse(index1+num, --index2); // 再翻转  start+num 到结束
+//     Reverse(index1, index2);  // 再翻转整个字符串
+
+//     return input;
+// }
 
 
 

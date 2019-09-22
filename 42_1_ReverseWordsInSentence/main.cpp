@@ -3,63 +3,135 @@
 using namespace std;
 
 
-// 翻转从start 到 end之间的字符
+
 void Reverse(char* start, char* end)
 {
-    if(start == nullptr || end == nullptr)return;
-    if(start>=end) return;
+    if(start == nullptr ||  end == nullptr) return;
 
-    char* index1 = start;
-    char* index2 = end;
+    char* p1 = start;
+    char* p2 = end;
 
-    while(index1 < index2)
+    while(p1<p2)
     {
-	char tmp;
-	tmp = *index1;
-	*index1 = *index2;
-	*index2 = tmp;
+	char tmp = *p1;
+	*p1 = *p2;
+	*p2 = tmp;
 
-	index1++;
-	index2--;
+	p1++;
+	p2--;
     }
+
 }
+
 
 
 char*  ReverseSentence(char* input)
 {
-    if(input == nullptr)return nullptr;
-    int length = 0;
+    if(input == nullptr) return nullptr;
+
     char* index = input;
-    while(*index!= 0)
+    int length = 0;
+    while(*index != 0)
     {
-	length++;
 	index++;
+	length++;
     }
     index--;
 
-    Reverse(input, index);// 翻转整个句子
+    Reverse(input, index);
+    
+    
+    char* p1 = input;
+    char* p2 = input;
 
-
-    char* index1 = input;
-    char* index2 = input;
-    while(length)
+    index++;
+  
+    while(p2<=index)
     {
-	if(*index2 == ' ') // 如果遍历到当前是空格，则翻转前面的word
+	if(*p2 == ' ')
 	{
-	    char* tmp = index2-1;
-	    Reverse(index1, tmp);
-	    index2++;
-	    index1 = index2;
-	    length--;
-	    continue;
+	    Reverse(p1, p2-1);
+	    p2++;
+	    p1 = p2;
+        continue;
 	}
-	index2++;  // 没有遇到空格
-	length--;
+	if(p2 == index)
+	{
+	    Reverse(p1, p2-1);
+	    break;
+	}
+	else
+	    p2++;
     }
 
-    Reverse(index1, index2-1); // 结束的时候还剩下最后一个单词
     return input;
 }
+
+
+
+
+
+
+
+
+
+// 翻转从start 到 end之间的字符
+// void Reverse(char* start, char* end)
+// {
+//     if(start == nullptr || end == nullptr)return;
+//     if(start>=end) return;
+
+//     char* index1 = start;
+//     char* index2 = end;
+
+//     while(index1 < index2)
+//     {
+//         char tmp;
+//         tmp = *index1;
+//         *index1 = *index2;
+//         *index2 = tmp;
+
+//         index1++;
+//         index2--;
+//     }
+// }
+
+
+// char*  ReverseSentence(char* input)
+// {
+//     if(input == nullptr)return nullptr;
+//     int length = 0;
+//     char* index = input;
+//     while(*index!= 0)
+//     {
+//         length++;
+//         index++;
+//     }
+//     index--;
+
+//     Reverse(input, index);// 翻转整个句子
+
+
+//     char* index1 = input;
+//     char* index2 = input;
+//     while(length)
+//     {
+//         if(*index2 == ' ') // 如果遍历到当前是空格，则翻转前面的word
+//         {
+//             char* tmp = index2-1;
+//             Reverse(index1, tmp);
+//             index2++;
+//             index1 = index2;
+//             length--;
+//             continue;
+//         }
+//         index2++;  // 没有遇到空格
+//         length--;
+//     }
+
+//     Reverse(index1, index2-1); // 结束的时候还剩下最后一个单词
+//     return input;
+// }
 
 
 // ====================测试代码====================
@@ -83,6 +155,7 @@ void Test(const char* testName, char* input, const char* expectedResult)
 void Test1()
 {
     char input[] = "I am a student.";
+
     char expected[] = "student. a am I";
 
     Test("Test1", input, expected);
