@@ -104,6 +104,7 @@ int Sum_Solution3(int n)
 
 
 
+
 // 利用模板类预编译
 template<unsigned int n> struct Sum_Solution4
 {
