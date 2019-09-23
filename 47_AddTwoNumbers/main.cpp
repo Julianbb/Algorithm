@@ -13,22 +13,48 @@
 using namespace std;
 
 
-
 int Add(int a, int b)
 {
-    if(b==0)
-    {
+    if(b == 0)
 	return a;
-    }
 
-    int sum =0, carry =0;
+    unsigned int tmp_data = (unsigned int)a ^ (unsigned int)b;
+    unsigned int tmp_con = (unsigned int)a & (unsigned int)b;  
 
-    sum = (unsigned int)a ^ (unsigned int)b ;
-    carry = (unsigned int)a & (unsigned int)b;
-
-   return Add((unsigned int)sum, (unsigned int)carry<<1);
-    
+    return Add(tmp_data, tmp_con<<1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int Add(int a, int b)
+// {
+//     if(b==0)
+//     {
+//         return a;
+//     }
+
+//     int sum =0, carry =0;
+
+//     sum = (unsigned int)a ^ (unsigned int)b ;
+//     carry = (unsigned int)a & (unsigned int)b;
+
+//    return Add((unsigned int)sum, (unsigned int)carry<<1);
+
+// }
 
 
 // ====================测试代码====================
