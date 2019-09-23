@@ -9,78 +9,149 @@
 #
 # ====================================================*/
 
-
-
 #include <iostream>
 using namespace std;
 
-
-bool Sorting(int*cards, int length, int* num_0)
+bool Sorting(int* cards, int length, int* num_0)
 {
-    if(cards == nullptr || length != 5)
-	return false;
-
-    int array[14] = {0};
-
+    if(cards == nullptr || length != 5 || num_0 == nullptr) return false;  
+    
+    int array[14] ={0};
     for(int i=0; i<length; i++)
     {
 	array[cards[i]]++;
     }
 
-    int j=0;
-    for(int i=0; i<14; i++)
+    int index = 0;
+
+    *num_0 = array[0];
+    for(int i=0; i<array[0]; i++)
+        cards[index++] = 0; 
+
+    for(int i=1; i<14; i++)
     {
-	if(array[i] > 1 && i!=0) //there are same cards 
+	if(array[i] != 0)
+    {
+        if(array[i]>1)
 	    return false;
-	while(array[i])
-	{
-	    cards[j++] = i;
-	    array[i]--;
-	    if(i==0)
-		(*num_0)++;
-	}
+	else
+	    cards[index++] = i;
+
+        
     }
+
+    }
+
     return true;
-
-}
-
-
-int CountLack(int* array, int length)
-{
-    if(array== nullptr || length < 1)
-	return 0;
-
-    int num_lack = 0;
-    for(int i=0; i<length-1; i++)
-    {
-	num_lack += array[length-1-i] - array[length-2-i];
-    }
-
-    num_lack = num_lack -(length-1); // length-1 : 应该有的空缺  
-    
-    return num_lack;
 }
 
 
 bool IsContinuous(int* cards, int length)
 {
-    if(cards == nullptr || length != 5)
-	return false;
+    if(cards == nullptr || length != 5) return false;
 
-    int num_0=0;
-    bool result = Sorting(cards, length, &num_0);
-    if(result == false)
-	return result;
-    
-    
-    int num_lack=0;
-    num_lack = CountLack(cards+num_0, 5-num_0);
+    int num_0 = 0;
+    bool sort = Sorting(cards, length, &num_0);
+    if(!sort) return false;
 
-    if(num_0 >= num_lack)
-	return true;
-    else
-	return false;
+    int sum = 0;
+    
+    if(num_0 == 0)
+    {
+    for(int i=4; i>=1; --i)
+    {
+	sum += (cards[i] - cards[i-1]);
+    }
+    if(sum == 4) return true;
+    else return false;
+    }
+
+
+    if(num_0 != 0)
+    {
+	int tmp = 5 - num_0;
+	for(int i=4; i>num_0; --i)
+	{
+	    sum += (cards[i] - cards[i-1]);
+	}
+	if(sum - tmp + 1 <= num_0)
+	    return true;
+	else 
+	    return false;
+    }
 }
+
+
+
+
+
+
+// bool Sorting(int*cards, int length, int* num_0)
+// {
+//     if(cards == nullptr || length != 5)
+//         return false;
+
+//     int array[14] = {0};
+
+//     for(int i=0; i<length; i++)
+//     {
+//         array[cards[i]]++;
+//     }
+
+//     int j=0;
+//     for(int i=0; i<14; i++)
+//     {
+//         if(array[i] > 1 && i!=0) //there are same cards
+//             return false;
+//         while(array[i])
+//         {
+//             cards[j++] = i;
+//             array[i]--;
+//             if(i==0)
+//                 (*num_0)++;
+//         }
+//     }
+//     return true;
+
+// }
+
+
+// int CountLack(int* array, int length)
+// {
+//     if(array== nullptr || length < 1)
+//         return 0;
+
+//     int num_lack = 0;
+//     for(int i=0; i<length-1; i++)
+//     {
+//         num_lack += array[length-1-i] - array[length-2-i];
+//     }
+
+//     num_lack = num_lack -(length-1); // length-1 : 应该有的空缺
+
+//     return num_lack;
+// }
+
+
+// bool IsContinuous(int* cards, int length)
+// {
+//     if(cards == nullptr || length != 5)
+//         return false;
+
+//     int num_0=0;
+//     bool result = Sorting(cards, length, &num_0);
+//     if(result == false)
+//         return result;
+
+
+//     int num_lack=0;
+//     num_lack = CountLack(cards+num_0, 5-num_0);
+
+//     if(num_0 >= num_lack)
+//         return true;
+//     else
+//         return false;
+// }
 
 
 
