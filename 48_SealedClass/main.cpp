@@ -67,18 +67,20 @@ public:
 
 };
 
-// class C : public B
-// {
-//     C()
-//     {
-//         cout << "this is c constructor " << endl;
-//     }
-// }
+class C : public B
+{
+    public:
+    C()
+    {
+	cout << "this is c constructor " << endl;
+    }
+};
 
 
 int main(void)
 {
     B b;
+    C c;
 
     return 0;
 }
