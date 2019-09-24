@@ -13,6 +13,7 @@
 #include <vector>
 using namespace std;
 
+
 void multiply(const vector<double>& array1, vector<double>& array2)
 {
     if(array1.size() <= 1 || array2.size() <= 1)
