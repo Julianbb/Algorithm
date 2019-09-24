@@ -13,52 +13,95 @@
 using namespace std;
 
 
-
-
-bool duplicate(int numbers[], int length, int* duplication) 
+bool duplicate(int numbers[], int length, int* duplication)
 {
-    if(numbers == nullptr || length <=1 )
-	return false;
-
-    if(duplication == nullptr)
-	return false;
-
+    if(numbers == nullptr || length <= 0) return false;
+    
     for(int i=0; i<length; i++)
-    {
-	if(numbers[i] > length-1)
+	if(numbers[i]<0 || numbers[i]>=length)
 	    return false;
-    }
-
-    int index = 0;
 
     for(int i=0; i<length; i++)
     {
-	if(numbers[i] == i)
-	    continue;
-	else
+	while(numbers[i] != i)
 	{
 	    if(numbers[i] == numbers[numbers[i]])
 	    {
-		duplication[index++] = numbers[i];
+		*duplication = numbers[i];
 		return true;
 	    }
 
-	    // numbers[i] = numbers[i] + numbers[numbers[i]];    这种交换在a和b 相互影响的时候不可使用,虽然不使用第三者
-	    // numbers[numbers[i]] = numbers[i] - numbers[numbers[i]];
-	    // numbers[i] = numbers[i] - numbers[numbers[i]];
-
 	    int tmp = numbers[i];
-	    numbers[i] = numbers[tmp];
+	    numbers[i] = numbers[numbers[i]];
 	    numbers[tmp] = tmp;
-
-	    i--;
-	    continue;
 	}
     }
 
     return false;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// bool duplicate(int numbers[], int length, int* duplication)
+// {
+//     if(numbers == nullptr || length <=1 )
+//         return false;
+
+//     if(duplication == nullptr)
+//         return false;
+
+//     for(int i=0; i<length; i++)
+//     {
+//         if(numbers[i] > length-1)
+//             return false;
+//     }
+
+//     int index = 0;
+
+//     for(int i=0; i<length; i++)
+//     {
+//         if(numbers[i] == i)
+//             continue;
+//         else
+//         {
+//             if(numbers[i] == numbers[numbers[i]])
+//             {
+//                 duplication[index++] = numbers[i];
+//                 return true;
+//             }
+
+//             // numbers[i] = numbers[i] + numbers[numbers[i]];    这种交换在a和b 相互影响的时候不可使用,虽然不使用第三者
+//             // numbers[numbers[i]] = numbers[i] - numbers[numbers[i]];
+//             // numbers[i] = numbers[i] - numbers[numbers[i]];
+
+//             int tmp = numbers[i];
+//             numbers[i] = numbers[tmp];
+//             numbers[tmp] = tmp;
+
+//             i--;
+//             continue;
+//         }
+//     }
+
+//     return false;
+
+// }
 
 
 //================= Test Code =================
