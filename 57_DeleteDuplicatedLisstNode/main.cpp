@@ -13,6 +13,55 @@
 #include <iostream>
 using namespace std;
 
+void deleteDuplication(ListNode** pHead)
+{
+    if(*pHead == nullptr || pHead == nullptr) return;
+
+    ListNode* pNode = *pHead;
+    ListNode* pPreNode = NULL;
+
+    while(pNode != NULL)
+    {
+	ListNode* pNext = pNode->m_pNext;
+	bool needDelete = false;
+
+	if(pNext != NULL && pNext->m_Value == pNode->m_Value)
+	    needDelete = true;
+
+	if(!needDelete)
+	{
+	    pPreNode = pNode;
+	    pNode = pNode->m_pNext;
+	}
+	else
+	{
+	    int value = pNode->m_Value;
+	    ListNode* pToBeDel = pNode;
+	    while(pToBeDel != NULL && pToBeDel->m_Value == value)
+	    {
+		pNext = pToBeDel->m_pNext;
+
+		delete pToBeDel;
+		pToBeDel = NULL;
+		pToBeDel = pNext;
+	    }
+
+	    if(pPreNode == NULL)
+		*pHead = pNext;
+	    else
+		pPreNode->m_pNext = pNext;
+
+	    pNode = pNext;
+	}
+    }
+}
+
+
+
+
+
+
+
 
 // void DeleteNode(ListNode* pPre, ListNode** pNow, int* num)
 // {
@@ -31,46 +80,46 @@ using namespace std;
 
 
 
-void deleteDuplication(ListNode** pHead)
-{
-    if(pHead == nullptr || *pHead == nullptr)
-	return;
+// void deleteDuplication(ListNode** pHead)
+// {
+//     if(pHead == nullptr || *pHead == nullptr)
+//         return;
 
-    ListNode* pPre = nullptr;
-    ListNode* pNode = (*pHead);
-    while(pNode != nullptr)
-    {
-	ListNode* pNext = pNode->m_pNext;
-	bool needDelete = false;
-	if(pNext!=nullptr && pNext->m_Value == pNode->m_Value)
-	    needDelete = true;
+//     ListNode* pPre = nullptr;
+//     ListNode* pNode = (*pHead);
+//     while(pNode != nullptr)
+//     {
+//         ListNode* pNext = pNode->m_pNext;
+//         bool needDelete = false;
+//         if(pNext!=nullptr && pNext->m_Value == pNode->m_Value)
+//             needDelete = true;
 
-	if(!needDelete)
-	{
-	    pPre = pNode;
-	    pNode = pNode->m_pNext;
-	}
-	else
-	{
-	    int value = pNode->m_Value;
-	    ListNode* pToBeDel = pNode;
-	    while(pToBeDel  != nullptr && pToBeDel->m_Value == value)
-	    {
-		pNext = pToBeDel->m_pNext;
-		delete pToBeDel;
-		pToBeDel = pNext;
-	    }
+//         if(!needDelete)
+//         {
+//             pPre = pNode;
+//             pNode = pNode->m_pNext;
+//         }
+//         else
+//         {
+//             int value = pNode->m_Value;
+//             ListNode* pToBeDel = pNode;
+//             while(pToBeDel  != nullptr && pToBeDel->m_Value == value)
+//             {
+//                 pNext = pToBeDel->m_pNext;
+//                 delete pToBeDel;
+//                 pToBeDel = pNext;
+//             }
 
-	    if(pPre == nullptr)
-	    {
-		*pHead = pNext;
-	    }
-	    else
-		pPre->m_pNext = pNext;
-	    pNode = pNext;
-	}
-    }
-}
+//             if(pPre == nullptr)
+//             {
+//                 *pHead = pNext;
+//             }
+//             else
+//                 pPre->m_pNext = pNext;
+//             pNode = pNext;
+//         }
+//     }
+// }
 
 
 // ==================== Test Code ====================
