@@ -23,31 +23,82 @@ struct BinaryTreeNode
 
 
 
+
 BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
 {
     if(pNode == nullptr) return nullptr;
-    
-    BinaryTreeNode* pNext = nullptr;
-    
-    if(pNode->m_pRight != nullptr)
+
+    BinaryTreeNode* node = pNode;
+
+    if(node->m_pRight != nullptr)
     {
-	pNext = pNode->m_pRight;
-	while(pNext->m_pLeft != nullptr)
+	BinaryTreeNode* tmp = node->m_pRight;
+	while(tmp->m_pLeft)
 	{
-	    pNext = pNext->m_pLeft;
+	    tmp = tmp->m_pLeft;
 	}
+	return tmp;
     }
 
-    else if(pNode->m_pParent != nullptr)
+
+    if(node->m_pRight == nullptr)
     {
-	
-	while(pNode->m_pParent!= nullptr && pNode == pNode->m_pParent->m_pRight)
+
+	BinaryTreeNode* tParent = node->m_pParent;
+	if(tParent == nullptr) return nullptr;
+	if(tParent != nullptr && tParent->m_pLeft == node)
 	{
-	    pNode = pNode->m_pParent;
-	}	    
-    	pNext = pNode->m_pParent;
+	    return tParent;
+	} 
+	if(tParent != nullptr && tParent->m_pRight == node)
+	{
+	    BinaryTreeNode* tmp = node;
+	    while(tmp->m_pParent != nullptr )
+	    {
+	       if(tmp != tmp->m_pParent->m_pLeft) 
+	       tmp = tmp->m_pParent;
+	       else
+		   return tmp->m_pParent;
+	    }
+
+	    return nullptr;
+
+	}
     }
-    return pNext;
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+    // BinaryTreeNode* pNext = nullptr;
+
+    // if(pNode->m_pRight != nullptr)
+    // {
+    //     pNext = pNode->m_pRight;
+    //     while(pNext->m_pLeft != nullptr)
+    //     {
+    //         pNext = pNext->m_pLeft;
+    //     }
+    // }
+
+    // else if(pNode->m_pParent != nullptr)
+    // {
+
+    //     while(pNode->m_pParent!= nullptr && pNode == pNode->m_pParent->m_pRight)
+    //     {
+    //         pNode = pNode->m_pParent;
+    //     }
+    //         pNext = pNode->m_pParent;
+    // }
+    // return pNext;
 }
 
     
