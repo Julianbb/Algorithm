@@ -15,29 +15,63 @@
 using namespace std;
 
 
-void GetMidOrder(BinaryTreeNode* pRoot, vector<BinaryTreeNode*>& array)
+BinaryTreeNode* InOrder(BinaryTreeNode* pRoot, int& k)
 {
-    if(pRoot == nullptr) return;
+    if(pRoot == nullptr) return nullptr;
+    BinaryTreeNode* result = nullptr;
 
-    GetMidOrder(pRoot->m_pLeft, array);
-    array.push_back(pRoot);
-    GetMidOrder(pRoot->m_pRight, array);
+    result = InOrder(pRoot->m_pLeft, k);
+
+
+    if(result == nullptr)
+    {
+        if(k == 1)
+        result = pRoot;
+        
+        k--;
+    }
+         
+    if(result == nullptr)
+    result = InOrder(pRoot->m_pRight, k);
+
+    return result;
 }
+
+
 
 
 BinaryTreeNode* KthNode(BinaryTreeNode* pRoot, int k)
 {
-    if(pRoot == nullptr)
-	return nullptr;
+    if(pRoot == nullptr || k<=0) return nullptr;
 
-    vector<BinaryTreeNode*> array;
-    GetMidOrder(pRoot, array);
 
-    if(k>0 && k<=array.size())
-	return array[k-1];
-    else
-	return nullptr;
+    return InOrder(pRoot, k);
+
 }
+
+// void GetMidOrder(BinaryTreeNode* pRoot, vector<BinaryTreeNode*>& array)
+// {
+//     if(pRoot == nullptr) return;
+
+//     GetMidOrder(pRoot->m_pLeft, array);
+//     array.push_back(pRoot);
+//     GetMidOrder(pRoot->m_pRight, array);
+// }
+
+
+// BinaryTreeNode* KthNode(BinaryTreeNode* pRoot, int k)
+// {
+//     if(pRoot == nullptr)
+//         return nullptr;
+
+//     vector<BinaryTreeNode*> array;
+//     GetMidOrder(pRoot, array);
+
+//     if(k>0 && k<=array.size())
+//         return array[k-1];
+//     else
+//         return nullptr;
+// }
 
 
 void Test(const char* testName, BinaryTreeNode* pRoot, unsigned int k, bool isNull, int expected)
