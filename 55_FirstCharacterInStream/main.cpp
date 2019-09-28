@@ -12,54 +12,102 @@
 #include <iostream>
 using namespace std;
 
-
 class CharStatistics
 {
+
 public:
-     CharStatistics():index(0)
+    CharStatistics():index(0)
     {
 	for(int i=0; i<256; i++)
-	    occurrence[i] = 0;
+	    ch[i] = -1;
     }
 
-    char FirstAppearingOnce()
+
+    void Insert(char c)
     {
+	index++;
+	if(ch[c] != -1)
+	{
+	    ch[c] = -99;
+	    return;
+	}
+	ch[c] = index;
+    }
+
+    char FirstAppearingOnce(void)
+    {
+	char firstch = 0;
 	int min = 999;
-	char ch = 0;
-
 	for(int i=0; i<256; i++)
 	{
-	    if(occurrence[i]>0 && occurrence[i]<min)
+	    if(ch[i] >= 0)
 	    {
-		min = occurrence[i];
-		ch = i;
+		if(ch[i] < min)
+		{
+		    min = ch[i];
+		    firstch = i;
+		}
 	    }
-	}
-	return ch;
-    }
 
-    void Insert(char ch)
-    {
-	if(occurrence[ch] > 0 || occurrence[ch] < 0 )
-	   occurrence[ch] = -1;  
-	else
-	{
-	    index++;
-	    occurrence[ch] = index;
 	}
 
+	return firstch;
     }
+
 
 private:
-    int occurrence[256];
+    int ch[256];
     int index;
+
 };
+
+// class CharStatistics
+// {
+// public:
+//      CharStatistics():index(0)
+//     {
+//         for(int i=0; i<256; i++)
+//             occurrence[i] = 0;
+//     }
+
+//     char FirstAppearingOnce()
+//     {
+//         int min = 999;
+//         char ch = 0;
+
+//         for(int i=0; i<256; i++)
+//         {
+//             if(occurrence[i]>0 && occurrence[i]<min)
+//             {
+//                 min = occurrence[i];
+//                 ch = i;
+//             }
+//         }
+//         return ch;
+//     }
+
+//     void Insert(char ch)
+//     {
+//         if(occurrence[ch] > 0 || occurrence[ch] < 0 )
+//            occurrence[ch] = -1;
+//         else
+//         {
+//             index++;
+//             occurrence[ch] = index;
+//         }
+
+//     }
+
+// private:
+//     int occurrence[256];
+//     int index;
+// };
 
 
 
 
 // ==================== Test Code ====================
-void Test(const char* testName, CharStatistics chars, char expected)
+void Test(const char* testName, CharStatistics& chars, char expected)
 {
     if(testName != NULL)
         printf("%s begins: ", testName);
