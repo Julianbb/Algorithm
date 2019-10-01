@@ -38,20 +38,16 @@ bool hasPathCore(char* matrix, int rows, int cols, int row, int col, const char*
         row += dir[i][0];
         col += dir[i][1];
 
-        if(row < 0 || row >= rows || col<0 || col >= cols)
+        if(row >= 0 && row < rows && col>=0 && col < cols)
         {
-            row -= dir[i][0];
-            col -= dir[i][1];
-            continue;
+            if(*(book+row*cols+col) == 0)
+            {
+                *(book+row*cols+col) = 1;
+                ret = ret || hasPathCore(matrix, rows, cols, row, col, str, book, my_str, step+1);            
+                *(book+row*cols+col) = 0;                   
+            }
         }
             
-
-        if(*(book+row*cols+col) == 0)
-        {
-            *(book+row*cols+col) = 1;
-            ret = ret || hasPathCore(matrix, rows, cols, row, col, str, book, my_str, step+1);            
-            *(book+row*cols+col) = 0;                   
-        }
         row -= dir[i][0];
         col -= dir[i][1];
                         
